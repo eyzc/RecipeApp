@@ -6,9 +6,8 @@ import PasswordIcon from "../icon/passwordIcon";
 import OpenEyeIcon from "../icon/openEyeIcon";
 import CloseEyeIcon from "../icon/closeeyeIcon";
 import Asci from "../icon/asci";
-import { SafeAreaView } from "react-native-safe-area-context";
 
-const Kayit = ({navigation, route}) => {
+const LoginScreen = () => {
     const [eye, setEye] = useState(true)
     const [eye2, setEye2] = useState(true)
 
@@ -19,26 +18,18 @@ const Kayit = ({navigation, route}) => {
         setEye2(!eye2)
     }
     return (
-        <SafeAreaView style={{ justifyContent: 'space-between', height: '100%', backgroundColor: 'black', }}>
+        <View style={{ justifyContent: 'space-between', height: '100%', backgroundColor: 'black', }}>
             <View style={styles.arkaplan}>
                 <Asci></Asci>
                 <View style={styles.titleView}>
                     <Text style={styles.titleTxt}>YEMEKYEMEK</Text>
-                    <Text style={{ ...styles.titleTxt, fontSize: 12, color: 'orange', }}>EAT DRINK REPEAT</Text>
+                    <Text style={{ ...styles.titleTxt, fontSize: 12, color: 'orange', }}>EAT   DRINK   REPEAT</Text>
                 </View>
                 <View style={styles.registerView}>
-                    <Text style={styles.registerTxt}>Register</Text>
+                    <Text style={styles.registerTxt}>L  O  G  I  N</Text>
                 </View>
                 <View style={styles.textInPutView}>
-                    <View style={styles.textInPut}>
-                        <NameIcon style={styles.icon}></NameIcon>
-                        <TextInput
-                            style={styles.textInPutTxt}
-                            placeholder="Full Name"
-                            placeholderTextColor={'white'}
-                        >
-                        </TextInput>
-                    </View>
+                   
 
                     <View style={styles.textInPut}>
                         <MailIcon></MailIcon>
@@ -46,6 +37,7 @@ const Kayit = ({navigation, route}) => {
                             style={styles.textInPutTxt}
                             placeholder="Email Adress"
                             placeholderTextColor={'white'}
+                        
                         >
                         </TextInput>
                     </View>
@@ -68,44 +60,26 @@ const Kayit = ({navigation, route}) => {
 
                             }
                         </TouchableOpacity>
+                        
                     </View>
-                    <View style={{ ...styles.textInPut, justifyContent: 'space-between' }}>
-                        <View style={styles.textInPut1}>
-                            <PasswordIcon></PasswordIcon>
-                            <TextInput
-                                style={{...styles.textInPutTxt,width:'80%'}}
-                                placeholder="Confrim Password"
-                                placeholderTextColor={'white'}
-                            >
-                            </TextInput>
-                        </View>
-                            {eye ? (
-                                <OpenEyeIcon onPress={AcikKapaliGoz} />
-                            ) : (
-                                <CloseEyeIcon onPress={AcikKapaliGoz} />
-                            )
-
-                            }
-                    </View>
+                    <TouchableOpacity style={styles.fotgotPassView}>
+                    <Text style={styles.forgotPasTxt}>Forgot Password?</Text>
+                    </TouchableOpacity>
                 </View>
+                
                 <TouchableOpacity style={styles.buttonView}>
-                    <Text style={styles.buttonTxt}>Register</Text>
+                    <Text style={styles.buttonTxt}>L o g i n</Text>
+                
                 </TouchableOpacity>
             </View>
             <View style={styles.bottomView}>
-                <Text style={{ ...styles.bottomTxt, color: 'white' }}>Already Registered?</Text>
-                <TouchableOpacity
-                onPress={()=>{
-navigation.navigate('Login')
-                }}
-                >
-                <Text style={styles.bottomTxt}>Login Now</Text>
-                </TouchableOpacity>
+                <Text style={{ ...styles.bottomTxt, color: 'white' }}>Not Registered Yet?</Text>
+                <Text style={styles.bottomTxt}>Register Now</Text>
             </View>
-        </SafeAreaView>
+        </View>
     )
 }
-export default Kayit
+export default LoginScreen
 const styles = StyleSheet.create({
     arkaplan: {
         backgroundColor: 'black',
@@ -134,7 +108,7 @@ const styles = StyleSheet.create({
         marginVertical: 30
     },
     registerTxt: {
-        color: 'white',
+        color:'white',
         fontSize: 25,
 
     },
@@ -154,12 +128,10 @@ const styles = StyleSheet.create({
     textInPut1: {
         flexDirection: 'row',
         alignItems: 'center',
-        
     },
     icon: {
         justifyContent: 'center',
         alignItems: 'center',
-        
     },
     textInPutTxt: {
         fontSize: 20,
@@ -168,7 +140,8 @@ const styles = StyleSheet.create({
         marginLeft:10
     },
     buttonView: {
-        backgroundColor: '#FF6B00',
+        borderWidth:2,
+        borderColor:'white',
         width: '75%',
         borderRadius: 25,
         justifyContent: 'center',
@@ -178,7 +151,7 @@ const styles = StyleSheet.create({
     },
     buttonTxt: {
         fontSize: 20,
-        color: 'black',
+        color: 'white',
         fontWeight: 'bold'
     },
     bottomView: {
@@ -191,5 +164,13 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: 'red',
         marginLeft: 5
+    },
+    forgotPasTxt:{
+        color:'#FF6B00',
+        fontSize:15,
+    },
+    fotgotPassView:{
+width:'100%',
+flexDirection:'row-reverse'
     }
 })
