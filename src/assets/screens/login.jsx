@@ -7,7 +7,7 @@ import OpenEyeIcon from "../icon/openEyeIcon";
 import CloseEyeIcon from "../icon/closeeyeIcon";
 import Asci from "../icon/asci";
 
-const LoginScreen = () => {
+const LoginScreen = ({navigation, route}) => {
     const [eye, setEye] = useState(true)
     const [eye2, setEye2] = useState(true)
 
@@ -67,14 +67,24 @@ const LoginScreen = () => {
                     </TouchableOpacity>
                 </View>
                 
-                <TouchableOpacity style={styles.buttonView}>
+                <TouchableOpacity
+                onPress={()=>{
+                    navigation.navigate('Main')
+                }}
+                style={styles.buttonView}>
                     <Text style={styles.buttonTxt}>L o g i n</Text>
                 
                 </TouchableOpacity>
             </View>
             <View style={styles.bottomView}>
                 <Text style={{ ...styles.bottomTxt, color: 'white' }}>Not Registered Yet?</Text>
+                <TouchableOpacity
+                onPress={()=>{
+                    navigation.navigate('Register')
+                }}
+                >
                 <Text style={styles.bottomTxt}>Register Now</Text>
+                </TouchableOpacity>
             </View>
         </View>
     )

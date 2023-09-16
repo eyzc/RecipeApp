@@ -2,8 +2,10 @@ import  React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { NativeScreenContainer } from 'react-native-screens'
 import { NavigationContainer } from '@react-navigation/native'
-import Kayit from './src/assets/screens/kayıt'
+import Register from './src/assets/screens/kayıt'
 import LoginScreen from './src/assets/screens/login'
+import MainScreen from './src/assets/screens/mainScreen'
+import { StyleSheet } from 'react-native'
 const Stack = createNativeStackNavigator()
 
 const App = () =>{
@@ -11,8 +13,8 @@ const App = () =>{
   <NavigationContainer>
     <Stack.Navigator>
 <Stack.Screen
-name='Kayıt'
-component={Kayit}
+name='Register'
+component={Register}
 options={{
   headerShown:false
 }}
@@ -21,6 +23,14 @@ options={{
 <Stack.Screen
 name='Login'
 component={LoginScreen}
+options={{
+  headerShown:false
+}}
+>
+</Stack.Screen>
+<Stack.Screen
+name='Main'
+component={MainScreen}
 options={{
   headerShown:false
 }}
