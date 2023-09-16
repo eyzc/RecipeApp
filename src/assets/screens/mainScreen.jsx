@@ -10,11 +10,17 @@ import TimeIcon from "../icon/time";
 import CupCake from "../icon/cupcake";
 import StarIcon from "../icon/star";
 const MainScreen = () => {
+  
     return (
         <View style={styles.arkaplan}>
             <View style={styles.topIcon}>
+                <TouchableOpacity>
                 <PlusIcon></PlusIcon>
+                </TouchableOpacity>
+                <TouchableOpacity>
                 <Cate></Cate>
+                </TouchableOpacity>
+                
             </View>
             <View style={styles.welcomeView}>
                 <Text style={styles.welcomeTxt}>Welcome</Text>
@@ -46,7 +52,9 @@ const MainScreen = () => {
             <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'space-between', marginVertical: 15 }}>
                 <View style={styles.todayFreshView}>
                     <View style={styles.todayFreshTopSideRow}>
-                        <LikeIcon></LikeIcon>
+                    <TouchableOpacity>
+                    <LikeIcon></LikeIcon>
+                    </TouchableOpacity>
                         <WaffleTost></WaffleTost>
                     </View>
                     <Text style={{ color: 'aqua' }}>Kategori</Text>
@@ -59,7 +67,9 @@ const MainScreen = () => {
                 </View>
                 <View style={styles.todayFreshView}>
                     <View style={styles.todayFreshTopSideRow}>
-                        <LikeIcon></LikeIcon>
+                    <TouchableOpacity>
+                    <LikeIcon></LikeIcon>
+                    </TouchableOpacity>
                         <WaffleTost></WaffleTost>
                     </View>
                     <Text style={{ color: 'aqua' }}>Kategori</Text>
@@ -94,7 +104,9 @@ const MainScreen = () => {
                     
                 </View>
                 <View style={{ justifyContent: 'space-between', alignItems: 'flex-end' }}>
+                <TouchableOpacity>
                     <LikeIcon></LikeIcon>
+                    </TouchableOpacity>
                     <View style={{ flexDirection: 'row', }}>
                         <TimeIcon></TimeIcon>
                         <Text style={{ color: '#FF6B00', marginLeft: 10 }}>10:03</Text>
@@ -117,7 +129,9 @@ const MainScreen = () => {
                     
                 </View>
                 <View style={{ justifyContent: 'space-between', alignItems: 'flex-end' }}>
+                <TouchableOpacity>
                     <LikeIcon></LikeIcon>
+                    </TouchableOpacity>
                     <View style={{ flexDirection: 'row', }}>
                         <TimeIcon></TimeIcon>
                         <Text style={{ color: '#FF6B00', marginLeft: 10 }}>10:03</Text>
@@ -140,7 +154,9 @@ const MainScreen = () => {
                     
                 </View>
                 <View style={{ justifyContent: 'space-between', alignItems: 'flex-end' }}>
+                    <TouchableOpacity>
                     <LikeIcon></LikeIcon>
+                    </TouchableOpacity>
                     <View style={{ flexDirection: 'row', }}>
                         <TimeIcon></TimeIcon>
                         <Text style={{ color: '#FF6B00', marginLeft: 10 }}>10:03</Text>
@@ -217,6 +233,7 @@ const styles = StyleSheet.create({
     freshView: {
         flexDirection: 'row',
         justifyContent: 'space-between',
+        marginBottom:10
     },
     seeAllTxt: {
         color: '#FF6B00',
