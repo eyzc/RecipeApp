@@ -9,7 +9,9 @@ import LikeIcon from "../icon/like";
 import TimeIcon from "../icon/time";
 import CupCake from "../icon/cupcake";
 import StarIcon from "../icon/star";
-const MainScreen = () => {
+import BurgerIcon from "../icon/burger";
+import UnLikeIcon from "../icon/unlike";
+const MainScreen = ({navigation, route}) => {
   
     return (
         <View style={styles.arkaplan}>
@@ -17,7 +19,11 @@ const MainScreen = () => {
                 <TouchableOpacity>
                 <PlusIcon></PlusIcon>
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity
+                onPress={()=>{
+                    navigation.navigate('Side')
+                }}
+                >
                 <Cate></Cate>
                 </TouchableOpacity>
                 
@@ -45,7 +51,11 @@ const MainScreen = () => {
             </View>
             <View style={styles.freshView}>
                 <Text style={styles.freshTxt}>Today’s Fresh Recipe</Text>
-                <TouchableOpacity>
+                <TouchableOpacity
+                onPress={()=>{
+                    navigation.navigate('TodayFreshSeeAll')
+                }}
+                >
                     <Text style={styles.seeAllTxt}>See All</Text>
                 </TouchableOpacity>
             </View>
@@ -57,6 +67,7 @@ const MainScreen = () => {
                     </TouchableOpacity>
                         <WaffleTost></WaffleTost>
                     </View>
+                    <View style={styles.boxView}>
                     <Text style={{ color: 'aqua' }}>Kategori</Text>
                     <Text style={{ color: 'white' }}>Name</Text>
                     <View style={{ flexDirection: 'row', marginVertical: 10 }}>
@@ -64,27 +75,37 @@ const MainScreen = () => {
                         <Text style={{ color: '#FF6B00', marginLeft: 10 }}>10:03</Text>
                     </View>
                     <Text style={{ color: 'white' }}>RATE 4.5/5</Text>
+                    </View>
                 </View>
                 <View style={styles.todayFreshView}>
                     <View style={styles.todayFreshTopSideRow}>
                     <TouchableOpacity>
-                    <LikeIcon></LikeIcon>
+                    <UnLikeIcon></UnLikeIcon>
                     </TouchableOpacity>
-                        <WaffleTost></WaffleTost>
+                        <BurgerIcon></BurgerIcon>
                     </View>
+                    <View>
                     <Text style={{ color: 'aqua' }}>Kategori</Text>
                     <Text style={{ color: 'white' }}>Name</Text>
                     <View style={{ flexDirection: 'row', marginVertical: 10 }}>
                         <TimeIcon></TimeIcon>
-                        <Text style={{ color: '#FF6B00', marginLeft: 10 }}>10:03</Text>
+                        <Text style={{ color: '#FF6B00', marginLeft: 10 }}>20:03</Text>
                     </View>
                     <Text style={{ color: 'white' }}>RATE 4.5/5</Text>
+                    </View>
+                    
                 </View>
+                
+                
 
             </View>
             <View style={styles.freshView}>
                 <Text style={styles.freshTxt}>Recommended</Text>
-                <TouchableOpacity>
+                <TouchableOpacity
+                   onPress={()=>{
+                    navigation.navigate('Recommended')
+                }}
+                >
                     <Text style={styles.seeAllTxt}>See All</Text>
                 </TouchableOpacity>
             </View>
@@ -250,12 +271,15 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderRadius: 20,
         padding: 10,
+        height:220,
+        width:170,
 
 
     },
     todayFreshTopSideRow: {
         flexDirection: 'row',
         justifyContent: 'space-between',
+        height:'50%'
     },
     recomendedFlatlistView: {
         flexDirection: 'row',
@@ -268,5 +292,9 @@ const styles = StyleSheet.create({
         width: '100%',
         marginBottom: 10,
         padding: 10
-    }
+    },
+    boxView:{
+        width:'100%',
+        height:'50%'
+       }
 })
