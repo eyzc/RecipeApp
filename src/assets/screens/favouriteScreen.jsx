@@ -21,7 +21,7 @@ const FovouriteScreen = ({navigation, route}) => {
                 <Text style={styles.topTxt}>Favourite</Text>
                 <TouchableOpacity
                 onPress={()=>{
-                    navigation.navigate('Main')
+                    navigation.navigate('Side')
                 }}
                 >
                 <BackIcon></BackIcon>
