@@ -10,6 +10,7 @@ import RecommendedSeeAllScreen from './src/assets/screens/recommendedSeeAllScree
 import FovouriteScreen from './src/assets/screens/favouriteScreen'
 import RecipeScreen from './src/assets/screens/recipeScreen'
 import TodayFreshSeeAllScreen from './src/assets/screens/todayFreshSeeAllScreen'
+import ProfileScreen from './src/assets/screens/profileScreen'
 const Stack = createNativeStackNavigator()
 
 const App = () =>{
@@ -73,6 +74,13 @@ options={{
 <Stack.Screen
 name='Recipe'
 component={RecipeScreen}
+options={{
+  headerShown:false
+}}
+></Stack.Screen>
+<Stack.Screen
+name='Profile'
+component={ProfileScreen}
 options={{
   headerShown:false
 }}

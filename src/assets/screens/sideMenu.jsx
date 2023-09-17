@@ -18,7 +18,11 @@ const SideMenuScreen = ({navigation,route}) => {
                     </View>
                     <View style={{ justifyContent: 'center', marginLeft: 20 }}>
                         <Text style={styles.nameTxt}>Denny</Text>
-                        <TouchableOpacity>
+                        <TouchableOpacity
+                          onPress={()=>{
+                            navigation.navigate('Profile')
+                        }}
+                        >
                             <Text style={styles.viewProfileTxt}>View Profile</Text>
                         </TouchableOpacity>
                     </View>
