@@ -34,7 +34,11 @@ navigation.navigate('Main')
                 <Text style={styles.txtIcon}>H o m e</Text>
                 </View>
                 <View style={styles.btnTxtView}>
-                    <TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={()=>{
+                        navigation.navigate('Favourite')
+                    }}
+                    >
                     <SideFav></SideFav>
                     </TouchableOpacity>
                 <Text style={styles.txtIcon}>F a v o u r i t e</Text>

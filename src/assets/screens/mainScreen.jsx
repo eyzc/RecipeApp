@@ -11,6 +11,9 @@ import CupCake from "../icon/cupcake";
 import StarIcon from "../icon/star";
 import BurgerIcon from "../icon/burger";
 import UnLikeIcon from "../icon/unlike";
+import ChocolateCake from "../icon/chocolatecake";
+import HalfStarIcon from "../icon/halfstar";
+import EmptyStarIcon from "../icon/emptystar";
 const MainScreen = ({navigation, route}) => {
   
     return (
@@ -120,7 +123,7 @@ const MainScreen = ({navigation, route}) => {
                     <StarIcon></StarIcon>
                     <StarIcon></StarIcon>
                     <StarIcon></StarIcon>
-                    <StarIcon></StarIcon>
+                    <EmptyStarIcon></EmptyStarIcon>
                     </View>
                     
                 </View>
@@ -144,8 +147,8 @@ const MainScreen = ({navigation, route}) => {
                     <StarIcon></StarIcon>
                     <StarIcon></StarIcon>
                     <StarIcon></StarIcon>
-                    <StarIcon></StarIcon>
-                    <StarIcon></StarIcon>
+                    <HalfStarIcon></HalfStarIcon>
+                    <EmptyStarIcon></EmptyStarIcon>
                     </View>
                     
                 </View>
@@ -169,8 +172,8 @@ const MainScreen = ({navigation, route}) => {
                     <StarIcon></StarIcon>
                     <StarIcon></StarIcon>
                     <StarIcon></StarIcon>
-                    <StarIcon></StarIcon>
-                    <StarIcon></StarIcon>
+                    <EmptyStarIcon></EmptyStarIcon>
+                    <EmptyStarIcon></EmptyStarIcon>
                     </View>
                     
                 </View>
