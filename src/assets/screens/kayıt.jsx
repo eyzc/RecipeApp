@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
     buttonView: {
         backgroundColor: '#FF6B00',
         width: '75%',
-        borderRadius: 25,
+        borderRadius: 15,
         justifyContent: 'center',
         alignItems: 'center',
         padding: 15,

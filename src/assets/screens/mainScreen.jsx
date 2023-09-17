@@ -63,6 +63,11 @@ const MainScreen = ({navigation, route}) => {
                 </TouchableOpacity>
             </View>
             <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'space-between', marginVertical: 15 }}>
+                <TouchableOpacity
+                 onPress={()=>{
+                    navigation.navigate('Recipe')
+                }}
+                >
                 <View style={styles.todayFreshView}>
                     <View style={styles.todayFreshTopSideRow}>
                     <TouchableOpacity>
@@ -80,6 +85,8 @@ const MainScreen = ({navigation, route}) => {
                     <Text style={{ color: 'white' }}>RATE 4.5/5</Text>
                     </View>
                 </View>
+                </TouchableOpacity>
+                
                 <View style={styles.todayFreshView}>
                     <View style={styles.todayFreshTopSideRow}>
                     <TouchableOpacity>

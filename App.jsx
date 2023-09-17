@@ -70,6 +70,13 @@ options={{
   headerShown:false
 }}
 ></Stack.Screen>
+<Stack.Screen
+name='Recipe'
+component={RecipeScreen}
+options={{
+  headerShown:false
+}}
+></Stack.Screen>
     </Stack.Navigator>
   </NavigationContainer>
   )
