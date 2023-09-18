@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList } from 'react-native'
 import PlusIcon from "../icon/plusIcon";
 import Cate from "../icon/cate";
 import SearchIcon from "../icon/search";
@@ -15,7 +15,29 @@ import ChocolateCake from "../icon/chocolatecake";
 import HalfStarIcon from "../icon/halfstar";
 import EmptyStarIcon from "../icon/emptystar";
 const MainScreen = ({navigation, route}) => {
-  
+  const tarifler = [
+    {
+      name:'Toast with Berries' ,
+      like:true,
+      time:'10:00',
+      rate:'4.5',
+      category:'Breakfast',
+    },
+{
+    name:'Chicken Burger' ,
+    like:false,
+    time:'20:00',
+    rate:'4',
+    category:'Dinner',
+},
+{
+    name:'Cup Cake' ,
+      like:true,
+      time:'05:00',
+      rate:'5',
+      category:'Sweet',
+}
+]
     return (
         <View style={styles.arkaplan}>
             <View style={styles.topIcon}>
@@ -62,8 +84,14 @@ const MainScreen = ({navigation, route}) => {
                     <Text style={styles.seeAllTxt}>See All</Text>
                 </TouchableOpacity>
             </View>
-            <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'space-between', marginVertical: 15 }}>
+         <FlatList
+        
+         horizontal
+         data={tarifler}
+         renderItem={element =>{
+            return(
                 <TouchableOpacity
+               
                  onPress={()=>{
                     navigation.navigate('Recipe')
                 }}
@@ -76,39 +104,21 @@ const MainScreen = ({navigation, route}) => {
                         <WaffleTost></WaffleTost>
                     </View>
                     <View style={styles.boxView}>
-                    <Text style={{ color: 'aqua' }}>Kategori</Text>
-                    <Text style={{ color: 'white' }}>Name</Text>
+                    <Text style={{ color: 'aqua' }}>{element.item.category}</Text>
+                    <Text style={{ color: 'white' }}>{element.item.name}</Text>
                     <View style={{ flexDirection: 'row', marginVertical: 10 }}>
                         <TimeIcon></TimeIcon>
-                        <Text style={{ color: '#FF6B00', marginLeft: 10 }}>10:03</Text>
+                        <Text style={{ color: '#FF6B00', marginLeft: 10 }}>{element.item.time}</Text>
                     </View>
-                    <Text style={{ color: 'white' }}>RATE 4.5/5</Text>
+                    <Text style={{ color: 'white' }}>{element.item.rate}/5</Text>
                     </View>
                 </View>
                 </TouchableOpacity>
-                
-                <View style={styles.todayFreshView}>
-                    <View style={styles.todayFreshTopSideRow}>
-                    <TouchableOpacity>
-                    <UnLikeIcon></UnLikeIcon>
-                    </TouchableOpacity>
-                        <BurgerIcon></BurgerIcon>
-                    </View>
-                    <View>
-                    <Text style={{ color: 'aqua' }}>Kategori</Text>
-                    <Text style={{ color: 'white' }}>Name</Text>
-                    <View style={{ flexDirection: 'row', marginVertical: 10 }}>
-                        <TimeIcon></TimeIcon>
-                        <Text style={{ color: '#FF6B00', marginLeft: 10 }}>20:03</Text>
-                    </View>
-                    <Text style={{ color: 'white' }}>RATE 4.5/5</Text>
-                    </View>
-                    
-                </View>
-                
-                
+            )
+         }}
+         >
 
-            </View>
+         </FlatList>
             <View style={styles.freshView}>
                 <Text style={styles.freshTxt}>Recommended</Text>
                 <TouchableOpacity
@@ -119,18 +129,19 @@ const MainScreen = ({navigation, route}) => {
                     <Text style={styles.seeAllTxt}>See All</Text>
                 </TouchableOpacity>
             </View>
-            <View style={styles.recomendedFlatlistView}>
+            <FlatList
+            data={tarifler}
+            renderItem={element=>{
+                return(
+                    <View style={styles.recomendedFlatlistView}>
                 <View style={{ alignItems: 'center', width: '20%', justifyContent: 'center', height: '100%' }}>
                     <CupCake></CupCake>
                 </View>
                 <View style={{width:'50%'}}>
-                    <Text numberOfLines={1} style={styles.freshTxt}>Cup Cake</Text>
+                    <Text numberOfLines={1} style={styles.freshTxt}>{element.item.name}</Text>
                     <View style={{ flexDirection: 'row', }}>
-                    <StarIcon></StarIcon>
-                    <StarIcon></StarIcon>
-                    <StarIcon></StarIcon>
-                    <StarIcon></StarIcon>
-                    <EmptyStarIcon></EmptyStarIcon>
+                    <Text style={{ color: 'white' }}>{element.item.rate}/5</Text>
+                    
                     </View>
                     
                 </View>
@@ -140,60 +151,18 @@ const MainScreen = ({navigation, route}) => {
                     </TouchableOpacity>
                     <View style={{ flexDirection: 'row', }}>
                         <TimeIcon></TimeIcon>
-                        <Text style={{ color: '#FF6B00', marginLeft: 10 }}>10:03</Text>
+                        <Text style={{ color: '#FF6B00', marginLeft: 10 }}>{element.item.time}</Text>
                     </View>
                 </View>
             </View>
-            <View style={styles.recomendedFlatlistView}>
-                <View style={{ alignItems: 'center', width: '20%', justifyContent: 'center', height: '100%' }}>
-                    <CupCake></CupCake>
-                </View>
-                <View style={{width:'50%'}}>
-                    <Text numberOfLines={1} style={styles.freshTxt}>Cup Cake</Text>
-                    <View style={{ flexDirection: 'row', }}>
-                    <StarIcon></StarIcon>
-                    <StarIcon></StarIcon>
-                    <StarIcon></StarIcon>
-                    <HalfStarIcon></HalfStarIcon>
-                    <EmptyStarIcon></EmptyStarIcon>
-                    </View>
-                    
-                </View>
-                <View style={{ justifyContent: 'space-between', alignItems: 'flex-end' }}>
-                <TouchableOpacity>
-                    <LikeIcon></LikeIcon>
-                    </TouchableOpacity>
-                    <View style={{ flexDirection: 'row', }}>
-                        <TimeIcon></TimeIcon>
-                        <Text style={{ color: '#FF6B00', marginLeft: 10 }}>10:03</Text>
-                    </View>
-                </View>
-            </View>
-            <View style={styles.recomendedFlatlistView}>
-                <View style={{ alignItems: 'center', width: '20%', justifyContent: 'center', height: '100%' }}>
-                    <CupCake></CupCake>
-                </View>
-                <View style={{width:'50%'}}>
-                    <Text numberOfLines={1} style={styles.freshTxt}>Cup Cake</Text>
-                    <View style={{ flexDirection: 'row', }}>
-                    <StarIcon></StarIcon>
-                    <StarIcon></StarIcon>
-                    <StarIcon></StarIcon>
-                    <EmptyStarIcon></EmptyStarIcon>
-                    <EmptyStarIcon></EmptyStarIcon>
-                    </View>
-                    
-                </View>
-                <View style={{ justifyContent: 'space-between', alignItems: 'flex-end' }}>
-                    <TouchableOpacity>
-                    <LikeIcon></LikeIcon>
-                    </TouchableOpacity>
-                    <View style={{ flexDirection: 'row', }}>
-                        <TimeIcon></TimeIcon>
-                        <Text style={{ color: '#FF6B00', marginLeft: 10 }}>10:03</Text>
-                    </View>
-                </View>
-            </View>
+                )
+            }}
+            >
+
+            </FlatList>
+           
+                
+            
         </View>
     )
 }
@@ -208,7 +177,6 @@ const styles = StyleSheet.create({
     topIcon: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-
     },
     welcomeView: {
         flexDirection: 'row',
@@ -283,6 +251,7 @@ const styles = StyleSheet.create({
         padding: 10,
         height:220,
         width:170,
+        marginRight:10
 
 
     },
