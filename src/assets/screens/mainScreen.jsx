@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList } from 'react-native'
+import React, { useState, useEffect } from "react";
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList,Image } from 'react-native'
 import PlusIcon from "../icon/plusIcon";
 import Cate from "../icon/cate";
 import SearchIcon from "../icon/search";
@@ -14,30 +14,47 @@ import UnLikeIcon from "../icon/unlike";
 import ChocolateCake from "../icon/chocolatecake";
 import HalfStarIcon from "../icon/halfstar";
 import EmptyStarIcon from "../icon/emptystar";
+import Burger from '../png/chickenburger.png'
+import { MMKVLoader, useMMKVStorage } from "react-native-mmkv-storage";
+
+const MMKV = new MMKVLoader().initialize()
 const MainScreen = ({navigation, route}) => {
-  const tarifler = [
-    {
-      name:'Toast with Berries' ,
-      like:true,
-      time:'10:00',
-      rate:'4.5',
-      category:'Breakfast',
-    },
-{
-    name:'Chicken Burger' ,
-    like:false,
-    time:'20:00',
-    rate:'4',
-    category:'Dinner',
-},
-{
-    name:'Cup Cake' ,
-      like:true,
-      time:'05:00',
-      rate:'5',
-      category:'Sweet',
-}
-]
+    const [tarifler, SetTarifler] = useMMKVStorage('yemek',MMKV,[]
+    
+    )
+useEffect(()=>{
+
+    SetTarifler([{
+        name:'Toast with Berries' ,
+        like:true,
+        time:'10:00',
+        rate:'4.5',
+        category:'Breakfast',
+        png:require('../png/toast.png'),
+        
+      },
+  {
+      name:'Chicken Burger' ,
+      like:false,
+      time:'20:00',
+      rate:'4',
+      category:'Dinner',
+      png:require('../png/chickenburger.png'),
+      
+  },
+  {
+      name:'Cup Cake' ,
+        like:true,
+        time:'05:00',
+        rate:'5',
+        category:'Sweet',
+        png:require('../png/cupcake.png'),
+       
+  }])
+},[])
+        
+    
+console.log(tarifler)
     return (
         <View style={styles.arkaplan}>
             <View style={styles.topIcon}>
@@ -46,7 +63,9 @@ const MainScreen = ({navigation, route}) => {
                 </TouchableOpacity>
                 <TouchableOpacity
                 onPress={()=>{
-                    navigation.navigate('Side')
+                    navigation.navigate('Side',{
+                        tarifler:tarifler
+                    })
                 }}
                 >
                 <Cate></Cate>
@@ -78,7 +97,11 @@ const MainScreen = ({navigation, route}) => {
                 <Text style={styles.freshTxt}>Today’s Fresh Recipe</Text>
                 <TouchableOpacity
                 onPress={()=>{
-                    navigation.navigate('TodayFreshSeeAll')
+                    navigation.navigate('TodayFreshSeeAll',{
+                        tarifler:tarifler
+                    }
+                    
+                    )
                 }}
                 >
                     <Text style={styles.seeAllTxt}>See All</Text>
@@ -89,11 +112,14 @@ const MainScreen = ({navigation, route}) => {
          horizontal
          data={tarifler}
          renderItem={element =>{
+        
             return(
                 <TouchableOpacity
                
                  onPress={()=>{
-                    navigation.navigate('Recipe')
+                    navigation.navigate('Recipe',{
+                        tarifler:tarifler
+                    })
                 }}
                 >
                 <View style={styles.todayFreshView}>
@@ -101,7 +127,7 @@ const MainScreen = ({navigation, route}) => {
                     <TouchableOpacity>
                     <LikeIcon></LikeIcon>
                     </TouchableOpacity>
-                        <WaffleTost></WaffleTost>
+                    <Image style={{width:100,height:90,resizeMode:'stretch'}} source={element.item.png}></Image>
                     </View>
                     <View style={styles.boxView}>
                     <Text style={{ color: 'aqua' }}>{element.item.category}</Text>
@@ -123,7 +149,9 @@ const MainScreen = ({navigation, route}) => {
                 <Text style={styles.freshTxt}>Recommended</Text>
                 <TouchableOpacity
                    onPress={()=>{
-                    navigation.navigate('Recommended')
+                    navigation.navigate('Recommended',{
+                        tarifler:tarifler
+                    })
                 }}
                 >
                     <Text style={styles.seeAllTxt}>See All</Text>
@@ -135,7 +163,7 @@ const MainScreen = ({navigation, route}) => {
                 return(
                     <View style={styles.recomendedFlatlistView}>
                 <View style={{ alignItems: 'center', width: '20%', justifyContent: 'center', height: '100%' }}>
-                    <CupCake></CupCake>
+                    <Image style={{width:65,height:55,resizeMode:'stretch'}} source={element.item.png}></Image>
                 </View>
                 <View style={{width:'50%'}}>
                     <Text numberOfLines={1} style={styles.freshTxt}>{element.item.name}</Text>

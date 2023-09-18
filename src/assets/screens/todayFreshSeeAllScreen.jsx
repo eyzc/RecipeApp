@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList,Image } from 'react-native'
 import PlusIcon from "../icon/plusIcon";
 import Cate from "../icon/cate";
 import SearchIcon from "../icon/search";
@@ -12,8 +12,15 @@ import StarIcon from "../icon/star";
 import BackIcon from "../icon/back";
 import BurgerIcon from "../icon/burger";
 import UnLikeIcon from "../icon/unlike";
+import MMKVStorage from "react-native-mmkv-storage";
+import { MMKVLoader, useMMKVStorage } from "react-native-mmkv-storage";
+
+const MMKV = new MMKVLoader().initialize()
+
 const TodayFreshSeeAllScreen = ({navigation, route}) => {
-  
+    const [tarifler, SetTarifler] = useMMKVStorage('yemek',MMKV,[])
+    console.log(tarifler)
+    
     return (
         <View style={styles.arkaplan}>
            
@@ -43,131 +50,34 @@ const TodayFreshSeeAllScreen = ({navigation, route}) => {
                     <HuniIcon></HuniIcon>
                 </TouchableOpacity>
             </View>
-           {/* BURASI FLAT LİST YERİ ROW 2 Lİ */}
-            <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'space-between', marginVertical: 15 }}>
+           <FlatList
+           numColumns={'2'}
+           data={tarifler}
+           renderItem={element=>{
+            
+            return(
                 <View style={styles.todayFreshView}>
-                    <View style={styles.todayFreshTopSideRow}>
-                    <TouchableOpacity>
-                    <LikeIcon></LikeIcon>
-                    </TouchableOpacity>
-                        <WaffleTost></WaffleTost>
-                    </View>
-                    <View style={styles.boxView}>
-                    <Text style={{ color: 'aqua' }}>Kategori</Text>
-                    <Text style={{ color: 'white' }}>Name</Text>
-                    <View style={{ flexDirection: 'row', marginVertical: 10 }}>
-                        <TimeIcon></TimeIcon>
-                        <Text style={{ color: '#FF6B00', marginLeft: 10 }}>10:03</Text>
-                    </View>
-                    <Text style={{ color: 'white' }}>RATE 4.5/5</Text>
-                    </View>
+                <View style={styles.todayFreshTopSideRow}>
+                <TouchableOpacity>
+                <LikeIcon></LikeIcon>
+                </TouchableOpacity>
+                <Image style={{width:90,height:100,resizeMode:'stretch'}} source={element.item.png}></Image>
                 </View>
-                <View style={styles.todayFreshView}>
-                    <View style={styles.todayFreshTopSideRow}>
-                    <TouchableOpacity>
-                    <UnLikeIcon></UnLikeIcon>
-                    </TouchableOpacity>
-                        <BurgerIcon></BurgerIcon>
-                    </View>
-                    <View>
-                    <Text style={{ color: 'aqua' }}>Kategori</Text>
-                    <Text style={{ color: 'white' }}>Name</Text>
-                    <View style={{ flexDirection: 'row', marginVertical: 10 }}>
-                        <TimeIcon></TimeIcon>
-                        <Text style={{ color: '#FF6B00', marginLeft: 10 }}>10:03</Text>
-                    </View>
-                    <Text style={{ color: 'white' }}>RATE 4.5/5</Text>
-                    </View>
-                    
+                <View style={styles.boxView}>
+                <Text style={{ color: 'aqua' }}>{element.item.category}</Text>
+                <Text style={{ color: 'white' }}>{element.item.name}</Text>
+                <View style={{ flexDirection: 'row', marginVertical: 10 }}>
+                    <TimeIcon></TimeIcon>
+                    <Text style={{ color: '#FF6B00', marginLeft: 10 }}>{element.item.time}</Text>
                 </View>
-                
-                
-
+                <Text style={{ color: 'white' }}>{element.item.rate}/5</Text>
+                </View>
             </View>
-            {/* BURASI FLAT LİST YERİ ROW 2 Lİ */}
-            <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'space-between', marginVertical: 15 }}>
-                <View style={styles.todayFreshView}>
-                    <View style={styles.todayFreshTopSideRow}>
-                    <TouchableOpacity>
-                    <LikeIcon></LikeIcon>
-                    </TouchableOpacity>
-                        <WaffleTost></WaffleTost>
-                    </View>
-                    <View style={styles.boxView}>
-                    <Text style={{ color: 'aqua' }}>Kategori</Text>
-                    <Text style={{ color: 'white' }}>Name</Text>
-                    <View style={{ flexDirection: 'row', marginVertical: 10 }}>
-                        <TimeIcon></TimeIcon>
-                        <Text style={{ color: '#FF6B00', marginLeft: 10 }}>10:03</Text>
-                    </View>
-                    <Text style={{ color: 'white' }}>RATE 4.5/5</Text>
-                    </View>
-                </View>
-                <View style={styles.todayFreshView}>
-                    <View style={styles.todayFreshTopSideRow}>
-                    <TouchableOpacity>
-                    <UnLikeIcon></UnLikeIcon>
-                    </TouchableOpacity>
-                        <BurgerIcon></BurgerIcon>
-                    </View>
-                    <View>
-                    <Text style={{ color: 'aqua' }}>Kategori</Text>
-                    <Text style={{ color: 'white' }}>Name</Text>
-                    <View style={{ flexDirection: 'row', marginVertical: 10 }}>
-                        <TimeIcon></TimeIcon>
-                        <Text style={{ color: '#FF6B00', marginLeft: 10 }}>10:03</Text>
-                    </View>
-                    <Text style={{ color: 'white' }}>RATE 4.5/5</Text>
-                    </View>
-                    
-                </View>
-                
-                
+            )
+           }}
+           >
 
-            </View>
-            {/* BURASI FLAT LİST YERİ ROW 2 Lİ */}
-             {/* BURASI FLAT LİST YERİ ROW 2 Lİ */}
-             <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'space-between', marginVertical: 15 }}>
-                <View style={styles.todayFreshView}>
-                    <View style={styles.todayFreshTopSideRow}>
-                    <TouchableOpacity>
-                    <LikeIcon></LikeIcon>
-                    </TouchableOpacity>
-                        <WaffleTost></WaffleTost>
-                    </View>
-                    <View style={styles.boxView}>
-                    <Text style={{ color: 'aqua' }}>Kategori</Text>
-                    <Text style={{ color: 'white' }}>Name</Text>
-                    <View style={{ flexDirection: 'row', marginVertical: 10 }}>
-                        <TimeIcon></TimeIcon>
-                        <Text style={{ color: '#FF6B00', marginLeft: 10 }}>10:03</Text>
-                    </View>
-                    <Text style={{ color: 'white' }}>RATE 4.5/5</Text>
-                    </View>
-                </View>
-                <View style={styles.todayFreshView}>
-                    <View style={styles.todayFreshTopSideRow}>
-                    <TouchableOpacity>
-                    <UnLikeIcon></UnLikeIcon>
-                    </TouchableOpacity>
-                        <BurgerIcon></BurgerIcon>
-                    </View>
-                    <View>
-                    <Text style={{ color: 'aqua' }}>Kategori</Text>
-                    <Text style={{ color: 'white' }}>Name</Text>
-                    <View style={{ flexDirection: 'row', marginVertical: 10 }}>
-                        <TimeIcon></TimeIcon>
-                        <Text style={{ color: '#FF6B00', marginLeft: 10 }}>20:03</Text>
-                    </View>
-                    <Text style={{ color: 'white' }}>RATE 4.5/5</Text>
-                    </View>
-                    
-                </View>
-                
-                
-
-            </View>
-            {/* BURASI FLAT LİST YERİ ROW 2 Lİ */}
+           </FlatList>
         </View>
     )
 }
@@ -244,6 +154,8 @@ const styles = StyleSheet.create({
         padding: 10,
         height:220,
         width:170,
+        marginRight:10,
+        marginBottom:10
 
 
     },
