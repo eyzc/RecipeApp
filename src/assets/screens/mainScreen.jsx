@@ -130,7 +130,7 @@ console.log(tarifler)
                     <Image style={{width:100,height:90,resizeMode:'stretch'}} source={element.item.png}></Image>
                     </View>
                     <View style={styles.boxView}>
-                    <Text style={{ color: 'black' }}>{element.item.category}</Text>
+                    <Text style={{ color: 'aqua' }}>{element.item.category}</Text>
                     <Text style={{ color: 'white' }}>{element.item.name}</Text>
                     <View style={{ flexDirection: 'row', marginVertical: 10 }}>
                         <TimeIcon></TimeIcon>
