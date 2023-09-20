@@ -125,7 +125,7 @@ console.log(tarifler)
                 <View style={styles.todayFreshView}>
                     <View style={styles.todayFreshTopSideRow}>
                     <TouchableOpacity>
-                    <LikeIcon></LikeIcon>
+                    {element.item.like ? (<LikeIcon></LikeIcon>):(<UnLikeIcon></UnLikeIcon>)}
                     </TouchableOpacity>
                     <Image style={{width:100,height:90,resizeMode:'stretch'}} source={element.item.png}></Image>
                     </View>
@@ -175,7 +175,7 @@ console.log(tarifler)
                 </View>
                 <View style={{ justifyContent: 'space-between', alignItems: 'flex-end' }}>
                 <TouchableOpacity>
-                    <LikeIcon></LikeIcon>
+                {element.item.like ? (<LikeIcon></LikeIcon>):(<UnLikeIcon></UnLikeIcon>)}
                     </TouchableOpacity>
                     <View style={{ flexDirection: 'row', }}>
                         <TimeIcon></TimeIcon>

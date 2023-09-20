@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList } from 'react-native'
 import PlusIcon from "../icon/plusIcon";
 import Cate from "../icon/cate";
 import SearchIcon from "../icon/search";
@@ -12,8 +12,12 @@ import StarIcon from "../icon/star";
 import BackIcon from "../icon/back";
 import BurgerIcon from "../icon/burger";
 import UnLikeIcon from "../icon/unlike";
+
+import { MMKVLoader, useMMKVStorage } from "react-native-mmkv-storage";
+import { Image } from "react-native-svg";
+const MMKV = new MMKVLoader().initialize()
 const FovouriteScreen = ({navigation, route}) => {
-  
+    const [tarifler, SetTarifler] = useMMKVStorage('yemek',MMKV,[])
     return (
         <View style={styles.arkaplan}>
            
@@ -43,204 +47,36 @@ const FovouriteScreen = ({navigation, route}) => {
                     <HuniIcon></HuniIcon>
                 </TouchableOpacity>
             </View>
-             {/* Bu view flat list olacak yatay */}
-            <View style={styles.recomendedFlatlistView}>
-                <View style={{ alignItems: 'center', width: '20%', justifyContent: 'center', height: '100%' }}>
-                    <CupCake></CupCake>
-                </View>
-                <View style={{width:'50%'}}>
-                    <Text numberOfLines={1} style={styles.freshTxt}>Cup Cake</Text>
-                    <View style={{ flexDirection: 'row', }}>
-                    <Text style={{fontSize:15,color:'white'}}>4.5/5</Text>
+             <FlatList
+             data={tarifler}
+             renderItem={element=>{
+                return(
+                    <View style={styles.recomendedFlatlistView}>
+                    <View style={{ alignItems: 'center', width: '20%', justifyContent: 'center', height: '100%' }}>
+                        <Image style={{with:65,height:55,resizeMode:'stretch'}} source={element.item.png}></Image>
                     </View>
-                    
-                </View>
-                <View style={{ justifyContent: 'space-between', alignItems: 'flex-end' }}>
-                <TouchableOpacity>
-                    <LikeIcon></LikeIcon>
-                    </TouchableOpacity>
-                    <View style={{ flexDirection: 'row', }}>
-                        <TimeIcon></TimeIcon>
-                        <Text style={{ color: '#FF6B00', marginLeft: 10 }}>10:03</Text>
+                    <View style={{width:'50%'}}>
+                        <Text numberOfLines={1} style={styles.freshTxt}>{element.item.name}</Text>
+                        <View style={{ flexDirection: 'row', }}>
+                        <Text style={{fontSize:15,color:'white'}}>{element.item.rate}/5</Text>
+                        </View>
+                        
                     </View>
-                </View>
-            </View>
-             {/* Bu view flat list olacak yatay */}
-             <View style={styles.recomendedFlatlistView}>
-                <View style={{ alignItems: 'center', width: '20%', justifyContent: 'center', height: '100%' }}>
-                    <CupCake></CupCake>
-                </View>
-                <View style={{width:'50%'}}>
-                    <Text numberOfLines={1} style={styles.freshTxt}>Cup Cake</Text>
-                    <View style={{ flexDirection: 'row', }}>
-                    <Text style={{fontSize:15,color:'white'}}>4.5/5</Text>
-                    </View>
-                    
-                </View>
-                <View style={{ justifyContent: 'space-between', alignItems: 'flex-end' }}>
-                <TouchableOpacity>
-                    <LikeIcon></LikeIcon>
-                    </TouchableOpacity>
-                    <View style={{ flexDirection: 'row', }}>
-                        <TimeIcon></TimeIcon>
-                        <Text style={{ color: '#FF6B00', marginLeft: 10 }}>10:03</Text>
+                    <View style={{ justifyContent: 'space-between', alignItems: 'flex-end' }}>
+                    <TouchableOpacity>
+                        {element.item.like ? (<LikeIcon></LikeIcon>):(<UnLikeIcon></UnLikeIcon>)}
+                        </TouchableOpacity>
+                        <View style={{ flexDirection: 'row', }}>
+                            <TimeIcon></TimeIcon>
+                            <Text style={{ color: '#FF6B00', marginLeft: 10 }}>{element.item.time}</Text>
+                        </View>
                     </View>
                 </View>
-            </View>
-             {/* Bu view flat list olacak yatay */}
-             <View style={styles.recomendedFlatlistView}>
-                <View style={{ alignItems: 'center', width: '20%', justifyContent: 'center', height: '100%' }}>
-                    <CupCake></CupCake>
-                </View>
-                <View style={{width:'50%'}}>
-                    <Text numberOfLines={1} style={styles.freshTxt}>Cup Cake</Text>
-                    <View style={{ flexDirection: 'row', }}>
-                    <Text style={{fontSize:15,color:'white'}}>4.5/5</Text>
-                    </View>
-                    
-                </View>
-                <View style={{ justifyContent: 'space-between', alignItems: 'flex-end' }}>
-                <TouchableOpacity>
-                    <LikeIcon></LikeIcon>
-                    </TouchableOpacity>
-                    <View style={{ flexDirection: 'row', }}>
-                        <TimeIcon></TimeIcon>
-                        <Text style={{ color: '#FF6B00', marginLeft: 10 }}>10:03</Text>
-                    </View>
-                </View>
-            </View>
-             {/* Bu view flat list olacak yatay */}
-             <View style={styles.recomendedFlatlistView}>
-                <View style={{ alignItems: 'center', width: '20%', justifyContent: 'center', height: '100%' }}>
-                    <CupCake></CupCake>
-                </View>
-                <View style={{width:'50%'}}>
-                    <Text numberOfLines={1} style={styles.freshTxt}>Cup Cake</Text>
-                    <View style={{ flexDirection: 'row', }}>
-                    <Text style={{fontSize:15,color:'white'}}>4.5/5</Text>
-                    </View>
-                    
-                </View>
-                <View style={{ justifyContent: 'space-between', alignItems: 'flex-end' }}>
-                <TouchableOpacity>
-                    <LikeIcon></LikeIcon>
-                    </TouchableOpacity>
-                    <View style={{ flexDirection: 'row', }}>
-                        <TimeIcon></TimeIcon>
-                        <Text style={{ color: '#FF6B00', marginLeft: 10 }}>10:03</Text>
-                    </View>
-                </View>
-            </View>
-             {/* Bu view flat list olacak yatay */}
-             <View style={styles.recomendedFlatlistView}>
-                <View style={{ alignItems: 'center', width: '20%', justifyContent: 'center', height: '100%' }}>
-                    <CupCake></CupCake>
-                </View>
-                <View style={{width:'50%'}}>
-                    <Text numberOfLines={1} style={styles.freshTxt}>Cup Cake</Text>
-                    <View style={{ flexDirection: 'row', }}>
-                    <Text style={{fontSize:15,color:'white'}}>4.5/5</Text>
-                    </View>
-                    
-                </View>
-                <View style={{ justifyContent: 'space-between', alignItems: 'flex-end' }}>
-                <TouchableOpacity>
-                    <LikeIcon></LikeIcon>
-                    </TouchableOpacity>
-                    <View style={{ flexDirection: 'row', }}>
-                        <TimeIcon></TimeIcon>
-                        <Text style={{ color: '#FF6B00', marginLeft: 10 }}>10:03</Text>
-                    </View>
-                </View>
-            </View>
-             {/* Bu view flat list olacak yatay */}
-             <View style={styles.recomendedFlatlistView}>
-                <View style={{ alignItems: 'center', width: '20%', justifyContent: 'center', height: '100%' }}>
-                    <CupCake></CupCake>
-                </View>
-                <View style={{width:'50%'}}>
-                    <Text numberOfLines={1} style={styles.freshTxt}>Cup Cake</Text>
-                    <View style={{ flexDirection: 'row', }}>
-                    <Text style={{fontSize:15,color:'white'}}>4.5/5</Text>
-                    </View>
-                    
-                </View>
-                <View style={{ justifyContent: 'space-between', alignItems: 'flex-end' }}>
-                <TouchableOpacity>
-                    <LikeIcon></LikeIcon>
-                    </TouchableOpacity>
-                    <View style={{ flexDirection: 'row', }}>
-                        <TimeIcon></TimeIcon>
-                        <Text style={{ color: '#FF6B00', marginLeft: 10 }}>10:03</Text>
-                    </View>
-                </View>
-            </View>
-             {/* Bu view flat list olacak yatay */}
-             <View style={styles.recomendedFlatlistView}>
-                <View style={{ alignItems: 'center', width: '20%', justifyContent: 'center', height: '100%' }}>
-                    <CupCake></CupCake>
-                </View>
-                <View style={{width:'50%'}}>
-                    <Text numberOfLines={1} style={styles.freshTxt}>Cup Cake</Text>
-                    <View style={{ flexDirection: 'row', }}>
-                    <Text style={{fontSize:15,color:'white'}}>4.5/5</Text>
-                    </View>
-                    
-                </View>
-                <View style={{ justifyContent: 'space-between', alignItems: 'flex-end' }}>
-                <TouchableOpacity>
-                    <LikeIcon></LikeIcon>
-                    </TouchableOpacity>
-                    <View style={{ flexDirection: 'row', }}>
-                        <TimeIcon></TimeIcon>
-                        <Text style={{ color: '#FF6B00', marginLeft: 10 }}>10:03</Text>
-                    </View>
-                </View>
-            </View>
-             {/* Bu view flat list olacak yatay */}
-             <View style={styles.recomendedFlatlistView}>
-                <View style={{ alignItems: 'center', width: '20%', justifyContent: 'center', height: '100%' }}>
-                    <CupCake></CupCake>
-                </View>
-                <View style={{width:'50%'}}>
-                    <Text numberOfLines={1} style={styles.freshTxt}>Cup Cake</Text>
-                    <View style={{ flexDirection: 'row', }}>
-                    <Text style={{fontSize:15,color:'white'}}>4.5/5</Text>
-                    </View>
-                    
-                </View>
-                <View style={{ justifyContent: 'space-between', alignItems: 'flex-end' }}>
-                <TouchableOpacity>
-                    <LikeIcon></LikeIcon>
-                    </TouchableOpacity>
-                    <View style={{ flexDirection: 'row', }}>
-                        <TimeIcon></TimeIcon>
-                        <Text style={{ color: '#FF6B00', marginLeft: 10 }}>10:03</Text>
-                    </View>
-                </View>
-            </View>
-             {/* Bu view flat list olacak yatay */}
-             <View style={styles.recomendedFlatlistView}>
-                <View style={{ alignItems: 'center', width: '20%', justifyContent: 'center', height: '100%' }}>
-                    <CupCake></CupCake>
-                </View>
-                <View style={{width:'50%'}}>
-                    <Text numberOfLines={1} style={styles.freshTxt}>Cup Cake</Text>
-                    <View style={{ flexDirection: 'row', }}>
-                    <Text style={{fontSize:15,color:'white'}}>4.5/5</Text>
-                    </View>
-                    
-                </View>
-                <View style={{ justifyContent: 'space-between', alignItems: 'flex-end' }}>
-                <TouchableOpacity>
-                    <LikeIcon></LikeIcon>
-                    </TouchableOpacity>
-                    <View style={{ flexDirection: 'row', }}>
-                        <TimeIcon></TimeIcon>
-                        <Text style={{ color: '#FF6B00', marginLeft: 10 }}>10:03</Text>
-                    </View>
-                </View>
-            </View>
+                )
+             }}
+             >
+
+             </FlatList>
         </View>
     )
 }
