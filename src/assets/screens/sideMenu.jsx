@@ -6,9 +6,12 @@ import Arka from "../icon/deneme";
 import HomeIcon from "../icon/home";
 import SideFav from "../icon/sideFav";
 import LogOutIcon from "../icon/logout";
+import { MMKVLoader, useMMKVStorage } from "react-native-mmkv-storage";
 
+const MMKV = new MMKVLoader().initialize()
 
 const SideMenuScreen = ({navigation,route}) => {
+    const [tarifler, SetTarifler] = useMMKVStorage('yemek',MMKV,[])
     return (
         <ImageBackground source={SideBack} style={styles.arkaplan}>
             <View style={styles.background}>

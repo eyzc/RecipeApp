@@ -16,6 +16,19 @@ import UnLikeIcon from "../icon/unlike";
 import { MMKVLoader, useMMKVStorage } from "react-native-mmkv-storage";
 import { Image } from "react-native-svg";
 const MMKV = new MMKVLoader().initialize()
+const  imageResources = (imageName) =>{
+    const staticImage = {
+        'toast_with_berries':require('../png/toast.png'),
+        'chicken_burger':require('../png/chickenburger.png'),
+        'chocolate_cake':require('../png/chocolatecake.png'),
+        'cup_cake':require('../png/cupcake.png'),
+    }
+if (staticImage[imageName]){
+    return(staticImage[imageName])
+}
+return  {uri: imageName} 
+
+}
 const FovouriteScreen = ({navigation, route}) => {
     const [tarifler, SetTarifler] = useMMKVStorage('yemek',MMKV,[])
     return (

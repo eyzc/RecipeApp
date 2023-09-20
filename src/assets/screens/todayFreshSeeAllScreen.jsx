@@ -16,7 +16,19 @@ import MMKVStorage from "react-native-mmkv-storage";
 import { MMKVLoader, useMMKVStorage } from "react-native-mmkv-storage";
 
 const MMKV = new MMKVLoader().initialize()
+const  imageResources = (imageName) =>{
+    const staticImage = {
+        'toast_with_berries':require('../png/toast.png'),
+        'chicken_burger':require('../png/chickenburger.png'),
+        'chocolate_cake':require('../png/chocolatecake.png'),
+        'cup_cake':require('../png/cupcake.png'),
+    }
+if (staticImage[imageName]){
+    return(staticImage[imageName])
+}
+return  {uri: imageName} 
 
+}
 const TodayFreshSeeAllScreen = ({navigation, route}) => {
     const [tarifler, SetTarifler] = useMMKVStorage('yemek',MMKV,[])
     console.log(tarifler)
@@ -61,7 +73,7 @@ const TodayFreshSeeAllScreen = ({navigation, route}) => {
                 <TouchableOpacity>
                 <LikeIcon></LikeIcon>
                 </TouchableOpacity>
-                <Image style={{width:90,height:100,resizeMode:'stretch'}} source={element.item.png}></Image>
+                <Image style={{width:90,height:100,resizeMode:'stretch'}} source={imageResources(element.item.pngName)}></Image>
                 </View>
                 <View style={styles.boxView}>
                 <Text style={{ color: 'aqua' }}>{element.item.category}</Text>

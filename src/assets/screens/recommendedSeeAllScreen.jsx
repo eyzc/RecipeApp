@@ -17,6 +17,19 @@ import { MMKVLoader, useMMKVStorage } from "react-native-mmkv-storage";
 import { Image } from "react-native-svg";
 
 const MMKV = new MMKVLoader().initialize()
+const  imageResources = (imageName) =>{
+    const staticImage = {
+        'toast_with_berries':require('../png/toast.png'),
+        'chicken_burger':require('../png/chickenburger.png'),
+        'chocolate_cake':require('../png/chocolatecake.png'),
+        'cup_cake':require('../png/cupcake.png'),
+    }
+if (staticImage[imageName]){
+    return(staticImage[imageName])
+}
+return  {uri: imageName} 
+
+}
 const RecommendedSeeAllScreen = ({navigation, route}) => {
     const [tarifler, SetTarifler] = useMMKVStorage('yemek',MMKV,[])
 
@@ -59,7 +72,7 @@ const RecommendedSeeAllScreen = ({navigation, route}) => {
                 <TouchableOpacity>
                 <UnLikeIcon></UnLikeIcon>
                 </TouchableOpacity>
-                    <Image source={{uri: element.item.png}} style={{width:5000,height:50}}></Image>
+                    <Image ssource={imageResources(element.item.pngName)} style={{width:60,height:50}}></Image>
                 </View>
                 <View>
                 <Text style={{ color: 'aqua' }}>{element.item.category}</Text>

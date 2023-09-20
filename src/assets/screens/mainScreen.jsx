@@ -18,6 +18,20 @@ import Burger from '../png/chickenburger.png'
 import { MMKVLoader, useMMKVStorage } from "react-native-mmkv-storage";
 
 const MMKV = new MMKVLoader().initialize()
+
+const  imageResources = (imageName) =>{
+    const staticImage = {
+        'toast_with_berries':require('../png/toast.png'),
+        'chicken_burger':require('../png/chickenburger.png'),
+        'chocolate_cake':require('../png/chocolatecake.png'),
+        'cup_cake':require('../png/cupcake.png'),
+    }
+if (staticImage[imageName]){
+    return(staticImage[imageName])
+}
+return  {uri: imageName} 
+
+}
 const MainScreen = ({navigation, route}) => {
     const [tarifler, SetTarifler] = useMMKVStorage('yemek',MMKV,[]
     
@@ -30,7 +44,7 @@ useEffect(()=>{
         time:'10:00',
         rate:'4.5',
         category:'Breakfast',
-        png:require('../png/toast.png'),
+        pngName:'toast_with_berries',
         
       },
   {
@@ -39,7 +53,7 @@ useEffect(()=>{
       time:'20:00',
       rate:'4',
       category:'Dinner',
-      png:require('../png/chickenburger.png'),
+      pngName:'chicken_burger',
       
   },
   {
@@ -48,9 +62,17 @@ useEffect(()=>{
         time:'05:00',
         rate:'5',
         category:'Sweet',
-        png:require('../png/cupcake.png'),
+        pngName:'cup_cake',
        
-  }])
+  },
+    {
+        name:'Chocolate Cake',
+        like:false,
+        time:'07:30',
+        category:'Sweet',
+        pngName:'chocolate_cake',
+    }
+])
 },[])
         
     
@@ -127,7 +149,7 @@ console.log(tarifler)
                     <TouchableOpacity>
                     {element.item.like ? (<LikeIcon></LikeIcon>):(<UnLikeIcon></UnLikeIcon>)}
                     </TouchableOpacity>
-                    <Image style={{width:100,height:90,resizeMode:'stretch'}} source={element.item.png}></Image>
+                    <Image style={{width:100,height:90,resizeMode:'stretch'}} source={imageResources(element.item.pngName)}></Image>
                     </View>
                     <View style={styles.boxView}>
                     <Text style={{ color: 'aqua' }}>{element.item.category}</Text>
@@ -163,7 +185,7 @@ console.log(tarifler)
                 return(
                     <View style={styles.recomendedFlatlistView}>
                 <View style={{ alignItems: 'center', width: '20%', justifyContent: 'center', height: '100%' }}>
-                    <Image style={{width:65,height:55,resizeMode:'stretch'}} source={element.item.png}></Image>
+                    <Image style={{width:65,height:55,resizeMode:'stretch'}} source={imageResources(element.item.pngName)}></Image>
                 </View>
                 <View style={{width:'50%'}}>
                     <Text numberOfLines={1} style={styles.freshTxt}>{element.item.name}</Text>
@@ -179,7 +201,7 @@ console.log(tarifler)
                     </TouchableOpacity>
                     <View style={{ flexDirection: 'row', }}>
                         <TimeIcon></TimeIcon>
-                        <Text style={{ color: '#FF6B00', marginLeft: 10 }}>{element.item.time}</Text>
+                        <Text style={{ color: '#FF6B00', marginLeft: 10, }}>{element.item.time}</Text>
                     </View>
                 </View>
             </View>
@@ -260,7 +282,7 @@ const styles = StyleSheet.create({
     freshView: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginBottom:10
+        marginVertical:10
     },
     seeAllTxt: {
         color: '#FF6B00',
@@ -273,13 +295,14 @@ const styles = StyleSheet.create({
     },
     todayFreshView: {
         backgroundColor: '#70707066',
-        width: '47%',
+        
         borderWidth: 2,
         borderRadius: 20,
         padding: 10,
         height:220,
         width:170,
-        marginRight:10
+        marginRight:10,
+        marginBottom:70
 
 
     },
@@ -297,7 +320,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         height: 70,
         width: '100%',
-        marginBottom: 10,
+        
         padding: 10
     },
     boxView:{
