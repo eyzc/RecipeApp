@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "893989565000",
+    "project_id": "recipeapp-4ded3",
+    "storage_bucket": "recipeapp-4ded3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:893989565000:android:b06dce6334cff740ef9e7d",
+        "android_client_info": {
+          "package_name": "com.efeyazici.recipeapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvbZaZVnWbjPdw47lW9-fC7Oa_mgO7jVI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

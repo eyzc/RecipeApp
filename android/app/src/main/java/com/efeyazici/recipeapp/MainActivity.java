@@ -1,4 +1,4 @@
-package com.recipeapp;
+package com.efeyazici.recipeapp;
 
 import android.os.Bundle;
 
