@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
-import BackIcon from "../icon/back";
-import ApplyIcon from "../icon/apply";
-import ProfileIcon2 from "../icon/profileIcon2";
+import BackIcon from "../assets/icon/back";
+import ApplyIcon from "../assets/icon/apply";
+import ProfileIcon2 from "../assets/icon/profileIcon2";
 
 const ProfileScreen = ({ navigation, route }) => {
     return (

@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList,Image } from 'react-native'
-import PlusIcon from "../icon/plusIcon";
-import Cate from "../icon/cate";
-import SearchIcon from "../icon/search";
-import HuniIcon from "../icon/huni";
-import WaffleTost from "../icon/waffleTost";
-import LikeIcon from "../icon/like";
-import TimeIcon from "../icon/time";
-import CupCake from "../icon/cupcake";
-import StarIcon from "../icon/star";
-import BurgerIcon from "../icon/burger";
-import UnLikeIcon from "../icon/unlike";
-import ChocolateCake from "../icon/chocolatecake";
-import HalfStarIcon from "../icon/halfstar";
-import EmptyStarIcon from "../icon/emptystar";
+import PlusIcon from "../assets/icon/plusIcon";
+import Cate from "../assets/icon/cate";
+import SearchIcon from "../assets/icon/search";
+import HuniIcon from "../assets/icon/huni";
+import WaffleTost from "../assets/icon/waffleTost";
+import LikeIcon from "../assets/icon/like";
+import TimeIcon from "../assets/icon/time";
+import CupCake from "../assets/icon/cupcake";
+import StarIcon from "../assets/icon/star";
+import BurgerIcon from "../assets/icon/burger";
+import UnLikeIcon from "../assets/icon/unlike";
+import ChocolateCake from "../assets/icon/chocolatecake";
+import HalfStarIcon from "../assets/icon/halfstar";
+import EmptyStarIcon from "../assets/icon/emptystar";
 import Burger from '../png/chickenburger.png'
 import { MMKVLoader, useMMKVStorage } from "react-native-mmkv-storage";
 

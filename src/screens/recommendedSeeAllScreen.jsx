@@ -1,43 +1,30 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList,Image } from 'react-native'
-import PlusIcon from "../icon/plusIcon";
-import Cate from "../icon/cate";
-import SearchIcon from "../icon/search";
-import HuniIcon from "../icon/huni";
-import WaffleTost from "../icon/waffleTost";
-import LikeIcon from "../icon/like";
-import TimeIcon from "../icon/time";
-import CupCake from "../icon/cupcake";
-import StarIcon from "../icon/star";
-import BackIcon from "../icon/back";
-import BurgerIcon from "../icon/burger";
-import UnLikeIcon from "../icon/unlike";
-import MMKVStorage from "react-native-mmkv-storage";
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList } from 'react-native'
+import PlusIcon from "../assets/icon/plusIcon";
+import Cate from "../assets/icon/cate";
+import SearchIcon from "../assets/icon/search";
+import HuniIcon from "../assets/icon/huni";
+import WaffleTost from "../assets/icon/waffleTost";
+import LikeIcon from "../assets/icon/like";
+import TimeIcon from "../assets/icon/time";
+import CupCake from "../assets/icon/cupcake";
+import StarIcon from "../assets/icon/star";
+import BackIcon from "../assets/icon/back";
+import BurgerIcon from "../assets/icon/burger";
+import UnLikeIcon from "../assets/icon/unlike";
+
 import { MMKVLoader, useMMKVStorage } from "react-native-mmkv-storage";
+import { Image } from "react-native-svg";
 
 const MMKV = new MMKVLoader().initialize()
-const  imageResources = (imageName) =>{
-    const staticImage = {
-        'toast_with_berries':require('../png/toast.png'),
-        'chicken_burger':require('../png/chickenburger.png'),
-        'chocolate_cake':require('../png/chocolatecake.png'),
-        'cup_cake':require('../png/cupcake.png'),
-    }
-if (staticImage[imageName]){
-    return(staticImage[imageName])
-}
-return  {uri: imageName} 
-
-}
-const TodayFreshSeeAllScreen = ({navigation, route}) => {
+const RecommendedSeeAllScreen = ({navigation, route}) => {
     const [tarifler, SetTarifler] = useMMKVStorage('yemek',MMKV,[])
-    console.log(tarifler)
-    
+
     return (
         <View style={styles.arkaplan}>
            
             <View style={styles.topView}>
-                <Text style={styles.topTxt}>Today’s Fresh Recipe</Text>
+                <Text style={styles.topTxt}>Recommended</Text>
                 <TouchableOpacity
                 onPress={()=>{
                     navigation.navigate('Main')
@@ -62,20 +49,19 @@ const TodayFreshSeeAllScreen = ({navigation, route}) => {
                     <HuniIcon></HuniIcon>
                 </TouchableOpacity>
             </View>
-           <FlatList
-           numColumns={'2'}
-           data={tarifler}
-           renderItem={element=>{
-            
+          <FlatList
+          numColumns={2}
+          data={tarifler}
+          renderItem={element=>{
             return(
                 <View style={styles.todayFreshView}>
                 <View style={styles.todayFreshTopSideRow}>
                 <TouchableOpacity>
-                <LikeIcon></LikeIcon>
+                {element.item.like ? (<LikeIcon></LikeIcon>):(<UnLikeIcon></UnLikeIcon>)}
                 </TouchableOpacity>
-                <Image style={{width:90,height:100,resizeMode:'stretch'}} source={imageResources(element.item.pngName)}></Image>
+                    <Image source={{uri: element.item.png}} style={{width:5000,height:50}}></Image>
                 </View>
-                <View style={styles.boxView}>
+                <View>
                 <Text style={{ color: 'aqua' }}>{element.item.category}</Text>
                 <Text style={{ color: 'white' }}>{element.item.name}</Text>
                 <View style={{ flexDirection: 'row', marginVertical: 10 }}>
@@ -84,16 +70,17 @@ const TodayFreshSeeAllScreen = ({navigation, route}) => {
                 </View>
                 <Text style={{ color: 'white' }}>{element.item.rate}/5</Text>
                 </View>
+                
             </View>
             )
-           }}
-           >
+          }}
+          >
 
-           </FlatList>
+          </FlatList>
         </View>
     )
 }
-export default TodayFreshSeeAllScreen
+export default RecommendedSeeAllScreen
 const styles = StyleSheet.create({
     arkaplan: {
         width: '100%',

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
-import NameIcon from "../icon/nameIcon";
-import MailIcon from "../icon/mailIcon";
-import PasswordIcon from "../icon/passwordIcon";
-import OpenEyeIcon from "../icon/openEyeIcon";
-import CloseEyeIcon from "../icon/closeeyeIcon";
-import Asci from "../icon/asci";
+import NameIcon from "../assets/icon/nameIcon";
+import MailIcon from "../assets/icon/mailIcon";
+import PasswordIcon from "../assets/icon/passwordIcon";
+import OpenEyeIcon from "../assets/icon/openEyeIcon";
+import CloseEyeIcon from "../assets/icon/closeeyeIcon";
+import Asci from "../assets/icon/asci";
 
 const LoginScreen = ({navigation, route}) => {
     const [eye, setEye] = useState(true)
@@ -48,6 +48,7 @@ const LoginScreen = ({navigation, route}) => {
                                 style={styles.textInPutTxt}
                                 placeholder="Password"
                                 placeholderTextColor={'white'}
+                                value=""
                             >
                             </TextInput>
                         </View>

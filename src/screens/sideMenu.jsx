@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, ImageBackground } from 'react-native'
-import ProfileIcon from "../icon/profile";
+import ProfileIcon from "../assets/icon/profile";
 import SideBack from '../png/sideback.png'
-import Arka from "../icon/deneme";
-import HomeIcon from "../icon/home";
-import SideFav from "../icon/sideFav";
-import LogOutIcon from "../icon/logout";
+import Arka from "../assets/icon/deneme";
+import HomeIcon from "../assets/icon/home";
+import SideFav from "../assets/icon/sideFav";
+import LogOutIcon from "../assets/icon/logout";
 import { MMKVLoader, useMMKVStorage } from "react-native-mmkv-storage";
 
 const MMKV = new MMKVLoader().initialize()
