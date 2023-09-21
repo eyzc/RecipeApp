@@ -71,6 +71,7 @@ useEffect(()=>{
         time:'07:30',
         category:'Sweet',
         pngName:'chocolate_cake',
+        rate:'3.5'
     }
 ])
 },[])
