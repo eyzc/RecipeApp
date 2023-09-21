@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
-import BackIcon from "../assets/icon/back";
-import BellIcon from "../assets/icon/bell";
-import UnLikeIcon from "../assets/icon/unlike";
-import ClockIcon from "../assets/icon/clock";
-import ServiceIcon from "../assets/icon/service";
-import Toast from "../assets/icon/toast";
+import BackIcon from "../icon/back";
+import BellIcon from "../icon/bell";
+import UnLikeIcon from "../icon/unlike";
+import ClockIcon from "../icon/clock";
+import ServiceIcon from "../icon/service";
+import Toast from "../icon/toast";
 const RecipeScreen = ({ navigation, route }) => {
     return (
         <View style={styles.arkaplan}>

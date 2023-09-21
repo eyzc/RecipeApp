@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList } from 'react-native'
-import PlusIcon from "../assets/icon/plusIcon";
-import Cate from "../assets/icon/cate";
-import SearchIcon from "../assets/icon/search";
-import HuniIcon from "../assets/icon/huni";
-import WaffleTost from "../assets/icon/waffleTost";
-import LikeIcon from "../assets/icon/like";
-import TimeIcon from "../assets/icon/time";
-import CupCake from "../assets/icon/cupcake";
-import StarIcon from "../assets/icon/star";
-import BackIcon from "../assets/icon/back";
-import BurgerIcon from "../assets/icon/burger";
-import UnLikeIcon from "../assets/icon/unlike";
+import PlusIcon from "../icon/plusIcon";
+import Cate from "../icon/cate";
+import SearchIcon from "../icon/search";
+import HuniIcon from "../icon/huni";
+import WaffleTost from "../icon/waffleTost";
+import LikeIcon from "../icon/like";
+import TimeIcon from "../icon/time";
+import CupCake from "../icon/cupcake";
+import StarIcon from "../icon/star";
+import BackIcon from "../icon/back";
+import BurgerIcon from "../icon/burger";
+import UnLikeIcon from "../icon/unlike";
 
 import { MMKVLoader, useMMKVStorage } from "react-native-mmkv-storage";
 import { Image } from "react-native-svg";

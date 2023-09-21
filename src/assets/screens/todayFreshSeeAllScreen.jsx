@@ -1,20 +1,20 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList } from 'react-native'
-import PlusIcon from "../assets/icon/plusIcon";
-import Cate from "../assets/icon/cate";
-import SearchIcon from "../assets/icon/search";
-import HuniIcon from "../assets/icon/huni";
-import WaffleTost from "../assets/icon/waffleTost";
-import LikeIcon from "../assets/icon/like";
-import TimeIcon from "../assets/icon/time";
-import CupCake from "../assets/icon/cupcake";
-import StarIcon from "../assets/icon/star";
-import BackIcon from "../assets/icon/back";
-import BurgerIcon from "../assets/icon/burger";
-import UnLikeIcon from "../assets/icon/unlike";
-
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList,Image } from 'react-native'
+import PlusIcon from "../icon/plusIcon";
+import Cate from "../icon/cate";
+import SearchIcon from "../icon/search";
+import HuniIcon from "../icon/huni";
+import WaffleTost from "../icon/waffleTost";
+import LikeIcon from "../icon/like";
+import TimeIcon from "../icon/time";
+import CupCake from "../icon/cupcake";
+import StarIcon from "../icon/star";
+import BackIcon from "../icon/back";
+import BurgerIcon from "../icon/burger";
+import UnLikeIcon from "../icon/unlike";
+import MMKVStorage from "react-native-mmkv-storage";
 import { MMKVLoader, useMMKVStorage } from "react-native-mmkv-storage";
-import { Image } from "react-native-svg";
+
 const MMKV = new MMKVLoader().initialize()
 const  imageResources = (imageName) =>{
     const staticImage = {
@@ -29,23 +29,25 @@ if (staticImage[imageName]){
 return  {uri: imageName} 
 
 }
-const FovouriteScreen = ({navigation, route}) => {
+const TodayFreshSeeAllScreen = ({navigation, route}) => {
     const [tarifler, SetTarifler] = useMMKVStorage('yemek',MMKV,[])
+    console.log(tarifler)
+    
     return (
         <View style={styles.arkaplan}>
            
             <View style={styles.topView}>
-                <Text style={styles.topTxt}>Favourite</Text>
+                <Text style={styles.topTxt}>Today’s Fresh Recipe</Text>
                 <TouchableOpacity
                 onPress={()=>{
-                    navigation.navigate('Side')
+                    navigation.navigate('Main')
                 }}
                 >
                 <BackIcon></BackIcon>
                 </TouchableOpacity>
                 
             </View>
-           
+            
             <View style={styles.searchView}>
                 <View style={styles.searchBorderView}>
                     <TextInput
@@ -60,40 +62,38 @@ const FovouriteScreen = ({navigation, route}) => {
                     <HuniIcon></HuniIcon>
                 </TouchableOpacity>
             </View>
-             <FlatList
-             data={tarifler}
-             renderItem={element=>{
-                return(
-                    <View style={styles.recomendedFlatlistView}>
-                    <View style={{ alignItems: 'center', width: '20%', justifyContent: 'center', height: '100%' }}>
-                        <Image style={{with:65,height:55,resizeMode:'stretch'}} source={element.item.png}></Image>
-                    </View>
-                    <View style={{width:'50%'}}>
-                        <Text numberOfLines={1} style={styles.freshTxt}>{element.item.name}</Text>
-                        <View style={{ flexDirection: 'row', }}>
-                        <Text style={{fontSize:15,color:'white'}}>{element.item.rate}/5</Text>
-                        </View>
-                        
-                    </View>
-                    <View style={{ justifyContent: 'space-between', alignItems: 'flex-end' }}>
-                    <TouchableOpacity>
-                        {element.item.like ? (<LikeIcon></LikeIcon>):(<UnLikeIcon></UnLikeIcon>)}
-                        </TouchableOpacity>
-                        <View style={{ flexDirection: 'row', }}>
-                            <TimeIcon></TimeIcon>
-                            <Text style={{ color: '#FF6B00', marginLeft: 10 }}>{element.item.time}</Text>
-                        </View>
-                    </View>
+           <FlatList
+           numColumns={'2'}
+           data={tarifler}
+           renderItem={element=>{
+            
+            return(
+                <View style={styles.todayFreshView}>
+                <View style={styles.todayFreshTopSideRow}>
+                <TouchableOpacity>
+                <LikeIcon></LikeIcon>
+                </TouchableOpacity>
+                <Image style={{width:90,height:100,resizeMode:'stretch'}} source={imageResources(element.item.pngName)}></Image>
                 </View>
-                )
-             }}
-             >
+                <View style={styles.boxView}>
+                <Text style={{ color: 'aqua' }}>{element.item.category}</Text>
+                <Text style={{ color: 'white' }}>{element.item.name}</Text>
+                <View style={{ flexDirection: 'row', marginVertical: 10 }}>
+                    <TimeIcon></TimeIcon>
+                    <Text style={{ color: '#FF6B00', marginLeft: 10 }}>{element.item.time}</Text>
+                </View>
+                <Text style={{ color: 'white' }}>{element.item.rate}/5</Text>
+                </View>
+            </View>
+            )
+           }}
+           >
 
-             </FlatList>
+           </FlatList>
         </View>
     )
 }
-export default FovouriteScreen
+export default TodayFreshSeeAllScreen
 const styles = StyleSheet.create({
     arkaplan: {
         width: '100%',
@@ -109,9 +109,8 @@ const styles = StyleSheet.create({
        justifyContent:'space-between'
     },
     topTxt: {
-        fontSize: 20,
-        color: 'white',
-        fontWeight:'bold'
+        fontSize: 30,
+        color: 'white'
     },
     
     answerView: {
@@ -125,7 +124,7 @@ const styles = StyleSheet.create({
     searchView: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginVertical: 50
+        marginVertical: 15
 
     },
     searchBorderView: {
@@ -152,21 +151,33 @@ const styles = StyleSheet.create({
         fontSize: 15,
         width: '85%'
     },
-    recomendedFlatlistView: {
+    freshView: {
         flexDirection: 'row',
         justifyContent: 'space-between',
+        marginBottom:10,
+       
+    },
+  
+    todayFreshView: {
         backgroundColor: '#70707066',
-        width: '100%',
+        width: '47%',
         borderWidth: 2,
-        borderRadius: 10,
-        height: 70,
-        width: '100%',
-        marginBottom: 10,
-        padding: 10
+        borderRadius: 20,
+        padding: 10,
+        height:220,
+        width:170,
+        marginRight:10,
+        marginBottom:10
+
+
     },
-    freshTxt: {
-        color: 'white',
-        fontSize: 20,
-        
+    todayFreshTopSideRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        height:'50%'
     },
+   boxView:{
+    width:'100%',
+    height:'50%'
+   }
 })

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
-import NameIcon from "../assets/icon/nameIcon";
-import MailIcon from "../assets/icon/mailIcon";
-import PasswordIcon from "../assets/icon/passwordIcon";
-import OpenEyeIcon from "../assets/icon/openEyeIcon";
-import CloseEyeIcon from "../assets/icon/closeeyeIcon";
-import Asci from "../assets/icon/asci";
-import useAuth from '../assets/utility/auth
+import NameIcon from "../icon/nameIcon";
+import MailIcon from "../icon/mailIcon";
+import PasswordIcon from "../icon/passwordIcon";
+import OpenEyeIcon from "../icon/openEyeIcon";
+import CloseEyeIcon from "../icon/closeeyeIcon";
+import Asci from "../icon/asci";
+import useAuth from '../utility/auth'
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const Kayit = ({navigation, route}) => {

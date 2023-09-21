@@ -2,15 +2,16 @@ import  React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { NativeScreenContainer } from 'react-native-screens'
 import { NavigationContainer } from '@react-navigation/native'
-import Register from './src/screens/kayıt'
-import LoginScreen from './src/screens/login'
-import MainScreen from './src/screens/mainScreen'
-import SideMenuScreen from './src/screens/sideMenu'
-import RecommendedSeeAllScreen from './src/screens/recommendedSeeAllScreen'
-import FovouriteScreen from './src/screens/favouriteScreen'
-import RecipeScreen from './src/screens/recipeScreen'
-import TodayFreshSeeAllScreen from './src/screens/todayFreshSeeAllScreen'
-import ProfileScreen from './src/screens/profileScreen'
+import Register from './src/assets/screens/kayıt'
+import LoginScreen from './src/assets/screens/login'
+import MainScreen from './src/assets/screens/mainScreen'
+import SideMenuScreen from './src/assets/screens/sideMenu'
+import RecommendedSeeAllScreen from './src/assets/screens/recommendedSeeAllScreen'
+import FovouriteScreen from './src/assets/screens/favouriteScreen'
+import RecipeScreen from './src/assets/screens/recipeScreen'
+import TodayFreshSeeAllScreen from './src/assets/screens/todayFreshSeeAllScreen'
+import ProfileScreen from './src/assets/screens/profileScreen'
+import BosEkran from './src/assets/screens/bosScreen'
 const Stack = createNativeStackNavigator()
 
 const App = () =>{
@@ -81,6 +82,13 @@ options={{
 <Stack.Screen
 name='Profile'
 component={ProfileScreen}
+options={{
+  headerShown:false
+}}
+></Stack.Screen>
+<Stack.Screen
+name='Bos'
+component={BosEkran}
 options={{
   headerShown:false
 }}
