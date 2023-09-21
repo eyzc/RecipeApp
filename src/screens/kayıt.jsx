@@ -6,10 +6,15 @@ import PasswordIcon from "../assets/icon/passwordIcon";
 import OpenEyeIcon from "../assets/icon/openEyeIcon";
 import CloseEyeIcon from "../assets/icon/closeeyeIcon";
 import Asci from "../assets/icon/asci";
-import useAuth from '../'
+import useAuth from '../assets/utility/auth
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const Kayit = ({navigation, route}) => {
+
+const [username, setUsername] = useState('')
+const [email, setEmail] = useState('')
+const [password, setPassword] = useState('')
+const [confirmPassword, setConfirmPassword] = useState('')
     const [eye, setEye] = useState(true)
     const [eye2, setEye2] = useState(true)
 
