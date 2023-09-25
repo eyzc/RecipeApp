@@ -1,6 +1,6 @@
 
 import {initializeApp} from "@react-native-firebase/app";
-import auth from '@react-native-firebase/auth'
+import auth, { firebase } from '@react-native-firebase/auth'
 
 
 const firebaseConfig = {
@@ -13,6 +13,10 @@ const firebaseConfig = {
     appId: "1:893989565000:web:14b14b426d935d11ef9e7d",
     measurementId: "G-Q7PDJY39T9"
   };
-  const app = initializeApp(firebaseConfig)
+  if (firebase.apps.length===0) {
+    const app = initializeApp(firebaseConfig)
+    
+  }
+ 
 
   export { auth }

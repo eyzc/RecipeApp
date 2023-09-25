@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert } from 'react-native'
 import NameIcon from "../icon/nameIcon";
 import MailIcon from "../icon/mailIcon";
 import PasswordIcon from "../icon/passwordIcon";
@@ -8,7 +8,7 @@ import CloseEyeIcon from "../icon/closeeyeIcon";
 import Asci from "../icon/asci";
 import useAuth from '../utility/auth'
 import { SafeAreaView } from "react-native-safe-area-context";
-
+import { auth } from "../utility/firebase";
 const Kayit = ({navigation, route}) => {
 
 const [username, setUsername] = useState('')
@@ -42,6 +42,7 @@ const [confirmPassword, setConfirmPassword] = useState('')
                             style={styles.textInPutTxt}
                             placeholder="Full Name"
                             placeholderTextColor={'white'}
+                            onChangeText={setUsername}
                         >
                         </TextInput>
                     </View>
@@ -52,6 +53,7 @@ const [confirmPassword, setConfirmPassword] = useState('')
                             style={styles.textInPutTxt}
                             placeholder="Email Adress"
                             placeholderTextColor={'white'}
+                            onChangeText={setEmail}
                         >
                         </TextInput>
                     </View>
@@ -62,6 +64,8 @@ const [confirmPassword, setConfirmPassword] = useState('')
                                 style={styles.textInPutTxt}
                                 placeholder="Password"
                                 placeholderTextColor={'white'}
+                                onChangeText={setPassword}
+                                secureTextEntry={eye2}
                             >
                             </TextInput>
                         </View>
@@ -82,6 +86,8 @@ const [confirmPassword, setConfirmPassword] = useState('')
                                 style={{...styles.textInPutTxt,width:'80%'}}
                                 placeholder="Confrim Password"
                                 placeholderTextColor={'white'}
+                                onChangeText={setConfirmPassword}
+                                secureTextEntry={eye}
                             >
                             </TextInput>
                         </View>
@@ -94,7 +100,21 @@ const [confirmPassword, setConfirmPassword] = useState('')
                             }
                     </View>
                 </View>
-                <TouchableOpacity style={styles.buttonView}>
+                <TouchableOpacity style={styles.buttonView}
+                onPress={async () =>{
+                    try {
+                    if (confirmPassword === password && username.length > 0 && email.length>0 && password.length>0) {
+                            let result = await auth().createUserWithEmailAndPassword(email, password)
+                            console.log('result',result)
+                        } 
+                        
+                    } catch (error) {
+                        Alert.alert(error.code)
+                        console.log(error)
+                    }
+                    
+                }}
+                >
                     <Text style={styles.buttonTxt}>Register</Text>
                 </TouchableOpacity>
             </View>

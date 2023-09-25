@@ -10,10 +10,10 @@ import Asci from "../icon/asci";
 const LoginScreen = ({navigation, route}) => {
     const [eye, setEye] = useState(true)
     const [eye2, setEye2] = useState(true)
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
 
-    const AcikKapaliGoz = () => {
-        setEye(!eye)
-    }
+  
     const AcikKapaliGoz2 = () => {
         setEye2(!eye2)
     }
@@ -37,6 +37,8 @@ const LoginScreen = ({navigation, route}) => {
                             style={styles.textInPutTxt}
                             placeholder="Email Adress"
                             placeholderTextColor={'white'}
+                            value={email}
+                            onChangeText={setEmail}
                         
                         >
                         </TextInput>
@@ -48,7 +50,9 @@ const LoginScreen = ({navigation, route}) => {
                                 style={styles.textInPutTxt}
                                 placeholder="Password"
                                 placeholderTextColor={'white'}
-                                value=""
+                                value={password}
+                                onChangeText={setPassword}
+                                secureTextEntry={eye2}
                             >
                             </TextInput>
                         </View>
