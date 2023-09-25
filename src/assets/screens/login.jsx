@@ -6,6 +6,7 @@ import PasswordIcon from "../icon/passwordIcon";
 import OpenEyeIcon from "../icon/openEyeIcon";
 import CloseEyeIcon from "../icon/closeeyeIcon";
 import Asci from "../icon/asci";
+import { auth } from "../utility/firebase";
 
 const LoginScreen = ({navigation, route}) => {
     const [eye, setEye] = useState(true)
@@ -73,8 +74,14 @@ const LoginScreen = ({navigation, route}) => {
                 </View>
                 
                 <TouchableOpacity
-                onPress={()=>{
-                    navigation.navigate('Main')
+                onPress={async()=>{
+                   if (email.length >0 && password.length>0) {
+                    await auth().signInWithEmailAndPassword(email, password)
+                    if (auth().currentUser) {
+                        navigation.navigate('Main')
+                       }
+                   }
+                   
                 }}
                 style={styles.buttonView}>
                     <Text style={styles.buttonTxt}>L o g i n</Text>

@@ -309,7 +309,6 @@ const styles = StyleSheet.create({
         marginRight:10,
         marginBottom:70
 
-
     },
     todayFreshTopSideRow: {
         flexDirection: 'row',
@@ -325,7 +324,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         height: 70,
         width: '100%',
-        
+        marginTop:10,
         padding: 10
     },
     boxView:{

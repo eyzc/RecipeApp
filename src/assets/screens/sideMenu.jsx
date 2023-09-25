@@ -7,6 +7,7 @@ import HomeIcon from "../icon/home";
 import SideFav from "../icon/sideFav";
 import LogOutIcon from "../icon/logout";
 import { MMKVLoader, useMMKVStorage } from "react-native-mmkv-storage";
+import { auth } from "../utility/firebase";
 
 const MMKV = new MMKVLoader().initialize()
 
@@ -52,7 +53,8 @@ navigation.navigate('Main')
                 </View>
                 <View style={styles.btnTxtView}>
                     <TouchableOpacity
-                    onPress={()=>{
+                    onPress={async()=>{
+                        auth().signOut()
                         navigation.navigate('Login')
                     }}
                     >

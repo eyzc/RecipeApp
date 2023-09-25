@@ -112,7 +112,9 @@ const [confirmPassword, setConfirmPassword] = useState('')
                         Alert.alert(error.code)
                         console.log(error)
                     }
-                    
+                    if (auth().currentUser) {
+                        navigation.navigate('Main')
+                       }
                 }}
                 >
                     <Text style={styles.buttonTxt}>Register</Text>
