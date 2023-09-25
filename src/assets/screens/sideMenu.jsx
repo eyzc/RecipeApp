@@ -13,6 +13,7 @@ const MMKV = new MMKVLoader().initialize()
 
 const SideMenuScreen = ({navigation,route}) => {
     const [tarifler, SetTarifler] = useMMKVStorage('yemek',MMKV,[])
+
     return (
         <ImageBackground source={SideBack} style={styles.arkaplan}>
             <View style={styles.background}>
@@ -44,7 +45,9 @@ navigation.navigate('Main')
                 <View style={styles.btnTxtView}>
                     <TouchableOpacity
                       onPress={()=>{
-                        navigation.navigate('Favourite')
+                        navigation.navigate('Favourite',
+                        {tarifler:tarifler}
+                        )
                     }}
                     >
                     <SideFav></SideFav>

@@ -16,6 +16,7 @@ import HalfStarIcon from "../icon/halfstar";
 import EmptyStarIcon from "../icon/emptystar";
 import Burger from '../png/chickenburger.png'
 import { MMKVLoader, useMMKVStorage } from "react-native-mmkv-storage";
+import { auth } from "../utility/firebase";
 
 const MMKV = new MMKVLoader().initialize()
 
@@ -101,7 +102,7 @@ console.log(tarifler)
             </View>
             <View style={styles.welcomeView}>
                 <Text style={styles.welcomeTxt}>Welcome</Text>
-                <Text style={styles.welcomeName}>Denny</Text>
+                <Text style={styles.welcomeName}>{auth().currentUser.email}</Text>
             </View>
             <View style={styles.answerView}>
                 <Text style={styles.answerTxt}>What would you like to cook today?</Text>
@@ -307,7 +308,7 @@ const styles = StyleSheet.create({
         height:220,
         width:170,
         marginRight:10,
-        marginBottom:70
+        marginBottom:120
 
     },
     todayFreshTopSideRow: {

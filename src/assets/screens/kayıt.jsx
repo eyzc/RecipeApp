@@ -15,8 +15,8 @@ const [username, setUsername] = useState('')
 const [email, setEmail] = useState('')
 const [password, setPassword] = useState('')
 const [confirmPassword, setConfirmPassword] = useState('')
-    const [eye, setEye] = useState(true)
-    const [eye2, setEye2] = useState(true)
+const [eye, setEye] = useState(true)
+const [eye2, setEye2] = useState(true)
 
     const AcikKapaliGoz = () => {
         setEye(!eye)

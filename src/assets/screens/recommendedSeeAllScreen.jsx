@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList } from 'react-native'
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList, Image } from 'react-native'
 import PlusIcon from "../icon/plusIcon";
 import Cate from "../icon/cate";
 import SearchIcon from "../icon/search";
@@ -14,7 +14,19 @@ import BurgerIcon from "../icon/burger";
 import UnLikeIcon from "../icon/unlike";
 
 import { MMKVLoader, useMMKVStorage } from "react-native-mmkv-storage";
-import { Image } from "react-native-svg";
+const  imageResources = (imageName) =>{
+    const staticImage = {
+        'toast_with_berries':require('../png/toast.png'),
+        'chicken_burger':require('../png/chickenburger.png'),
+        'chocolate_cake':require('../png/chocolatecake.png'),
+        'cup_cake':require('../png/cupcake.png'),
+    }
+if (staticImage[imageName]){
+    return(staticImage[imageName])
+}
+return  {uri: imageName} 
+
+}
 
 const MMKV = new MMKVLoader().initialize()
 const RecommendedSeeAllScreen = ({navigation, route}) => {
@@ -59,7 +71,7 @@ const RecommendedSeeAllScreen = ({navigation, route}) => {
                 <TouchableOpacity>
                 {element.item.like ? (<LikeIcon></LikeIcon>):(<UnLikeIcon></UnLikeIcon>)}
                 </TouchableOpacity>
-                    <Image source={{uri: element.item.png}} style={{width:5000,height:50}}></Image>
+                <Image style={{width:65,height:55,resizeMode:'stretch'}} source={imageResources(element.item.pngName)}></Image>
                 </View>
                 <View>
                 <Text style={{ color: 'aqua' }}>{element.item.category}</Text>

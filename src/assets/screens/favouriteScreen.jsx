@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList } from 'react-native'
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList, Image } from 'react-native'
 import PlusIcon from "../icon/plusIcon";
 import Cate from "../icon/cate";
 import SearchIcon from "../icon/search";
@@ -14,7 +14,6 @@ import BurgerIcon from "../icon/burger";
 import UnLikeIcon from "../icon/unlike";
 
 import { MMKVLoader, useMMKVStorage } from "react-native-mmkv-storage";
-import { Image } from "react-native-svg";
 const MMKV = new MMKVLoader().initialize()
 const  imageResources = (imageName) =>{
     const staticImage = {
@@ -23,12 +22,14 @@ const  imageResources = (imageName) =>{
         'chocolate_cake':require('../png/chocolatecake.png'),
         'cup_cake':require('../png/cupcake.png'),
     }
-if (staticImage[imageName]){
-    return(staticImage[imageName])
-}
+    if (staticImage[imageName]){
+        return(staticImage[imageName])
+    }
 return  {uri: imageName} 
 
 }
+
+
 const FovouriteScreen = ({navigation, route}) => {
     const [tarifler, SetTarifler] = useMMKVStorage('yemek',MMKV,[])
     return (
@@ -66,7 +67,7 @@ const FovouriteScreen = ({navigation, route}) => {
                 return(
                     <View style={styles.recomendedFlatlistView}>
                     <View style={{ alignItems: 'center', width: '20%', justifyContent: 'center', height: '100%' }}>
-                        <Image style={{with:65,height:55,resizeMode:'stretch'}} source={element.item.png}></Image>
+                    <Image style={{width:65,height:55,resizeMode:'stretch'}} source={imageResources(element.item.pngName)}></Image> 
                     </View>
                     <View style={{width:'50%'}}>
                         <Text numberOfLines={1} style={styles.freshTxt}>{element.item.name}</Text>
