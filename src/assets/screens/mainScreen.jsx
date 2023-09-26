@@ -152,7 +152,22 @@ console.log(tarifler)
                 >
                 <View style={styles.todayFreshView}>
                     <View style={styles.todayFreshTopSideRow}>
-                    <TouchableOpacity>
+                    <TouchableOpacity
+                     onPress={()=>{
+                        SetTarifler([
+                            ...tarifler.slice(0, element.index),
+                        {
+                            name:element.item.name ,
+                            like:!element.item.like,
+                            time:element.item.time,
+                            rate:element.item.rate,
+                            category:element.item.category,
+                            pngName:element.item.pngName, 
+                        },
+                        ...tarifler.slice(element.index + 1)
+                        ])
+                    }}
+                    >
                     {element.item.like ? (<LikeIcon></LikeIcon>):(<UnLikeIcon></UnLikeIcon>)}
                     </TouchableOpacity>
                     <Image style={{width:100,height:90,resizeMode:'stretch'}} source={imageResources(element.item.pngName)}></Image>
@@ -202,7 +217,22 @@ console.log(tarifler)
                     
                 </View>
                 <View style={{ justifyContent: 'space-between', alignItems: 'flex-end' }}>
-                <TouchableOpacity>
+                <TouchableOpacity
+                onPress={()=>{
+                    SetTarifler([
+                        ...tarifler.slice(0, element.index),
+                    {
+                        name:element.item.name ,
+                        like:!element.item.like,
+                        time:element.item.time,
+                        rate:element.item.rate,
+                        category:element.item.category,
+                        pngName:element.item.pngName, 
+                    },
+                    ...tarifler.slice(element.index + 1)
+                    ])
+                }}
+                >
                 {element.item.like ? (<LikeIcon></LikeIcon>):(<UnLikeIcon></UnLikeIcon>)}
                     </TouchableOpacity>
                     <View style={{ flexDirection: 'row', }}>

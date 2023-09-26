@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList, Image } from 'react-native'
 import PlusIcon from "../icon/plusIcon";
 import Cate from "../icon/cate";
@@ -14,6 +14,7 @@ import BurgerIcon from "../icon/burger";
 import UnLikeIcon from "../icon/unlike";
 
 import { MMKVLoader, useMMKVStorage } from "react-native-mmkv-storage";
+import transactions from "react-native-mmkv-storage/dist/src/transactions";
 const MMKV = new MMKVLoader().initialize()
 const  imageResources = (imageName) =>{
     const staticImage = {
@@ -32,6 +33,18 @@ return  {uri: imageName}
 
 const FovouriteScreen = ({navigation, route}) => {
     const [tarifler, SetTarifler] = useMMKVStorage('yemek',MMKV,[])
+    const [likeTarif, SetLikeTarif] = useState([])
+    
+    useEffect(()=>{
+for (let i = 0; i < tarifler.length; i++) {
+    if (tarifler[i].like === true) {
+        likeTarif.push(tarifler[i])
+    }
+    
+}
+
+    },[tarifler])
+    console.log(likeTarif)
     return (
         <View style={styles.arkaplan}>
            
@@ -39,7 +52,9 @@ const FovouriteScreen = ({navigation, route}) => {
                 <Text style={styles.topTxt}>Favourite</Text>
                 <TouchableOpacity
                 onPress={()=>{
-                    navigation.navigate('Side')
+                    navigation.navigate('Side',{
+                        tarifler:tarifler
+                    })
                 }}
                 >
                 <BackIcon></BackIcon>
@@ -62,31 +77,56 @@ const FovouriteScreen = ({navigation, route}) => {
                 </TouchableOpacity>
             </View>
              <FlatList
-             data={tarifler}
+             data={likeTarif}
              renderItem={element=>{
-                return(
-                    <View style={styles.recomendedFlatlistView}>
-                    <View style={{ alignItems: 'center', width: '20%', justifyContent: 'center', height: '100%' }}>
-                    <Image style={{width:65,height:55,resizeMode:'stretch'}} source={imageResources(element.item.pngName)}></Image> 
+             for (let index = 0; index < element.item.length; index++) {
+                if (element.item.like) {
+                    
+                }
+                
+             }
+             return(
+                <View style={styles.recomendedFlatlistView}>
+                <View style={{ alignItems: 'center', width: '20%', justifyContent: 'center', height: '100%' }}>
+                <Image style={{width:65,height:55,resizeMode:'stretch'}} source={imageResources(element.item.pngName)}></Image> 
+                </View>
+                <View style={{width:'50%'}}>
+                    <Text numberOfLines={1} style={styles.freshTxt}>{element.item.name}</Text>
+                    <View style={{ flexDirection: 'row', }}>
+                    <Text style={{fontSize:15,color:'white'}}>{element.item.rate}/5</Text>
                     </View>
-                    <View style={{width:'50%'}}>
-                        <Text numberOfLines={1} style={styles.freshTxt}>{element.item.name}</Text>
-                        <View style={{ flexDirection: 'row', }}>
-                        <Text style={{fontSize:15,color:'white'}}>{element.item.rate}/5</Text>
-                        </View>
-                        
-                    </View>
-                    <View style={{ justifyContent: 'space-between', alignItems: 'flex-end' }}>
-                    <TouchableOpacity>
-                        {element.item.like ? (<LikeIcon></LikeIcon>):(<UnLikeIcon></UnLikeIcon>)}
-                        </TouchableOpacity>
-                        <View style={{ flexDirection: 'row', }}>
-                            <TimeIcon></TimeIcon>
-                            <Text style={{ color: '#FF6B00', marginLeft: 10 }}>{element.item.time}</Text>
-                        </View>
+                    
+                </View>
+                <View style={{ justifyContent: 'space-between', alignItems: 'flex-end' }}>
+                <TouchableOpacity
+                onPress={()=>{
+                    SetLikeTarif([])
+                    SetTarifler([
+                        ...tarifler.slice(0, element.index),
+                    {
+                        name:element.item.name ,
+                        like:!element.item.like,
+                        time:element.item.time,
+                        rate:element.item.rate,
+                        category:element.item.category,
+                        pngName:element.item.pngName, 
+                    },
+                    
+                    ])
+                   
+                   
+                  
+                 }}
+                >
+                    {element.item.like ? (<LikeIcon></LikeIcon>):(<UnLikeIcon></UnLikeIcon>)}
+                    </TouchableOpacity>
+                    <View style={{ flexDirection: 'row', }}>
+                        <TimeIcon></TimeIcon>
+                        <Text style={{ color: '#FF6B00', marginLeft: 10 }}>{element.item.time}</Text>
                     </View>
                 </View>
-                )
+            </View>
+            )
              }}
              >
 

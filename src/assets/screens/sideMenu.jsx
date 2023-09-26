@@ -35,7 +35,9 @@ const SideMenuScreen = ({navigation,route}) => {
                 <View style={styles.btnTxtView}>
                     <TouchableOpacity
                     onPress={()=>{
-navigation.navigate('Main')
+navigation.navigate('Main',{
+    tarifler:tarifler
+})
                     }}
                     >
                     <HomeIcon></HomeIcon>
