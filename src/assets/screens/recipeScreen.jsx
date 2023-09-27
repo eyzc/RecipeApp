@@ -16,6 +16,8 @@ const RecipeScreen = ({ navigation, route }) => {
     const malzeme = tarifler[index].ingredients
     console.log(malzeme)
     console.log(index)
+    
+    
     const  imageResources = (imageName) =>{
         const staticImage = {
             'toast_with_berries':require('../png/toast.png'),
@@ -43,7 +45,27 @@ const RecipeScreen = ({ navigation, route }) => {
             <Text style={{ color: '#128FAE', paddingLeft: 30, paddingTop: 30 }}>{tarifler[index].category}</Text>
             <View style={styles.nameTxt}>
                 <Text style={{ color: 'white', fontSize: 25 }}>{tarifler[index].name}</Text>
-                {tarifler[index].like ? (<LikeIcon></LikeIcon>):(<UnLikeIcon></UnLikeIcon>)}
+                <TouchableOpacity
+                onPress={()=>{
+                    SetTarifler([
+                        ...tarifler.slice(0, index),
+                    {
+                        name:tarifler[index].name,
+                        like:!tarifler[index].like,
+                        time:tarifler[index].time,
+                        rate:tarifler[index].rate,
+                        category:tarifler[index].category,
+                        pngName:tarifler[index].pngName, 
+                        ingredients:tarifler[index].ingredients
+                    },
+                    ...tarifler.slice(index + 1)
+                    ])
+                    console.log(tarifler)
+                }}
+                >
+{tarifler[index].like ? (<LikeIcon></LikeIcon>):(<UnLikeIcon></UnLikeIcon>)}
+                </TouchableOpacity>
+                
             </View>
             <Text style={{ color: 'white', paddingLeft: 30 }}>{tarifler[index].rate}/5</Text>
             <View style={{ marginTop:50,flexDirection:'row',justifyContent:'space-between',alignItems:'center' }}>

@@ -103,6 +103,7 @@ const FovouriteScreen = ({navigation, route}) => {
                         rate:element.item.rate,
                         category:element.item.category,
                         pngName:element.item.pngName, 
+                        ingredients:element.item.ingredients
                     },
                     ...tarifler.slice(element.index + 1)
                     ])

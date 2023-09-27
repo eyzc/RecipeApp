@@ -70,7 +70,24 @@ const TodayFreshSeeAllScreen = ({navigation, route}) => {
             return(
                 <View style={styles.todayFreshView}>
                 <View style={styles.todayFreshTopSideRow}>
-                <TouchableOpacity>
+                <TouchableOpacity
+                onPress={()=>{
+                    SetTarifler([
+                        ...tarifler.slice(0, element.index),
+                    {
+                        name:element.item.name ,
+                        like:!element.item.like,
+                        time:element.item.time,
+                        rate:element.item.rate,
+                        category:element.item.category,
+                        pngName:element.item.pngName, 
+                        ingredients:element.item.ingredients
+                    },
+                    ...tarifler.slice(element.index + 1)
+                    ])
+                    console.log(tarifler)
+                }}
+                >
                 {element.item.like ? (<LikeIcon></LikeIcon>):(<UnLikeIcon></UnLikeIcon>)}
                 </TouchableOpacity>
                 <Image style={{width:90,height:100,resizeMode:'stretch'}} source={imageResources(element.item.pngName)}></Image>
