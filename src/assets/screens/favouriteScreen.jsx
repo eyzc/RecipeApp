@@ -94,7 +94,7 @@ const FovouriteScreen = ({navigation, route}) => {
                 <View style={{ justifyContent: 'space-between', alignItems: 'flex-end' }}>
                 <TouchableOpacity
                 onPress={()=>{
-                     SetTarifler([
+                    SetTarifler([
                         ...tarifler.slice(0, element.index),
                     {
                         name:element.item.name ,

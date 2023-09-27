@@ -105,6 +105,7 @@ const [eye2, setEye2] = useState(true)
                     try {
                     if (confirmPassword === password && username.length > 0 && email.length>0 && password.length>0) {
                             let result = await auth().createUserWithEmailAndPassword(email, password)
+                            auth().currentUser.sendEmailVerification()
                             console.log('result',result)
                         } 
                         
@@ -113,7 +114,7 @@ const [eye2, setEye2] = useState(true)
                         console.log(error)
                     }
                     if (auth().currentUser) {
-                        navigation.navigate('Main')
+                        navigation.navigate('Login')
                        }
                 }}
                 >

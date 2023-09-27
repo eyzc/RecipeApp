@@ -77,7 +77,7 @@ const LoginScreen = ({navigation, route}) => {
                 onPress={async()=>{
                    if (email.length >0 && password.length>0) {
                     await auth().signInWithEmailAndPassword(email, password)
-                    if (auth().currentUser) {
+                    if (auth().currentUser  && auth().currentUser.emailVerified == true) {
                         navigation.navigate('Main')
                        }
                    }

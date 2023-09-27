@@ -33,8 +33,10 @@ return  {uri: imageName}
 
 }
 const MainScreen = ({navigation, route}) => {
-    const [tarifler, SetTarifler] = useMMKVStorage('yemek',MMKV,[])
+    let [tarifler, SetTarifler] = useMMKVStorage('yemek',MMKV,[])
+    
 useEffect(()=>{
+    MMKV.getMap('yemek')
 if (tarifler.length==0) {
     SetTarifler([{
         name:'Toast with Berries' ,
