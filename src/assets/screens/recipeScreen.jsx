@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TextInput, TouchableOpacity,Image } from 'react-native'
+import { View, Text, StyleSheet, TextInput, TouchableOpacity,Image, FlatList } from 'react-native'
 import BackIcon from "../icon/back";
 import BellIcon from "../icon/bell";
 import UnLikeIcon from "../icon/unlike";
@@ -13,6 +13,8 @@ const MMKV = new MMKVLoader().initialize()
 const RecipeScreen = ({ navigation, route }) => {
     const [tarifler, SetTarifler] = useMMKVStorage('yemek',MMKV,[])
     const index = route.params.index
+    const malzeme = tarifler[index].ingredients
+    console.log(malzeme)
     console.log(index)
     const  imageResources = (imageName) =>{
         const staticImage = {
@@ -57,15 +59,22 @@ const RecipeScreen = ({ navigation, route }) => {
                 </View>
                 <Image style={{width:200,height:180,resizeMode:'stretch'}} source={imageResources(tarifler[index].pngName)}></Image>
             </View>
-            <View style={{flexDirection:'row',marginTop:15}}>
-                <View style={styles.materialsView}></View>
-                <View style={styles.materialsView}></View>
-                <View style={styles.materialsView}></View>
-                <View style={styles.materialsView}></View>
-                <View style={styles.materialsView}></View>
-                <View style={styles.materialsView}></View>
-            </View>
-            <View style={{width:'100%',marginTop:75,justifyContent:'center',alignItems:'center'}}>
+            <FlatList
+            style={{width:'100%',marginTop:10,height:150,padding:10}}
+            numColumns={'2'}
+            
+            data={malzeme}
+            renderItem={element=>{
+                return(
+                    <View style={{backgroundColor:'white',height:50,width:'45%',marginHorizontal:10, borderRadius:20,padding:5,alignItems:'center',justifyContent:'center',marginBottom:10}}>
+                        <Text style={{fontWeight:'bold',color:'#FF6B00',fontSize:15,textAlign:'center'}}>{element.item}</Text>
+                    </View>
+                )
+            }}
+            >
+
+            </FlatList>
+            <View style={{width:'100%',marginTop:30,justifyContent:'center',alignItems:'center'}}>
                 <TouchableOpacity style={styles.buttonView}>
                     <Text style={styles.buttonTxt}>Tutorial</Text>
                 </TouchableOpacity>

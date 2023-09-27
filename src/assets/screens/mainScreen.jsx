@@ -47,6 +47,14 @@ if (tarifler.length==0) {
         rate:'4.5',
         category:'Breakfast',
         pngName:'toast_with_berries',
+        ingredients:[
+            '2 slices of whole wheat bread',
+            '½ cup plain',
+            '¾ cup frozen berries',
+            '2 tablespoons of peanut butter',
+            '½ teaspoon of coconut oil',
+            '1 teaspoon cinnamon'
+        ]
         
       },
   {
@@ -56,6 +64,14 @@ if (tarifler.length==0) {
       rate:'4',
       category:'Dinner',
       pngName:'chicken_burger',
+      ingredients:[
+        'Ground chicken',
+        'Bread crumbs',
+        'Onion',
+        'Egg',
+        'Seasonings',
+        'Oil'
+    ]
       
   },
   {
@@ -65,6 +81,17 @@ if (tarifler.length==0) {
         rate:'5',
         category:'Sweet',
         pngName:'cup_cake',
+        ingredients:[
+            '110g softened butter',
+            '110g golden caster sugar',
+            '2 large eggs',
+            '½ tsp vanilla extract',
+            '110g self-raising flour',
+            '150g softened butter',
+            '300g icing sugar',
+            '1 tsp vanilla extract',
+            '3 tbsp milk'
+        ]
        
   },
     {
@@ -73,7 +100,20 @@ if (tarifler.length==0) {
         time:'07:30',
         category:'Sweet',
         pngName:'chocolate_cake',
-        rate:'3.5'
+        rate:'3.5',
+        ingredients:[
+            '2 cups white sugar',
+            '1 ¾ cups all-purpose flour',
+            '¾ cup unsweetened cocoa powder', 
+            '1 ½ teaspoons baking powder',
+            '1 ½ teaspoons baking soda',
+            '1 teaspoon salt',
+            '2 eggs',
+            '1 cup milk',
+            '½ cup vegetable oil',
+            '2 teaspoons vanilla extract',
+            '1 cup boiling water'
+        ]
     }
 ])  
 }
@@ -169,6 +209,7 @@ console.log([...tarifler]+'main')
                             rate:element.item.rate,
                             category:element.item.category,
                             pngName:element.item.pngName, 
+                            ingredients:element.item.ingredients
                         },
                         ...tarifler.slice(element.index + 1)
                         ])
