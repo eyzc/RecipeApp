@@ -15,6 +15,7 @@ import ChocolateCake from "../icon/chocolatecake";
 import HalfStarIcon from "../icon/halfstar";
 import EmptyStarIcon from "../icon/emptystar";
 import Burger from '../png/chickenburger.png'
+import { useIsFocused } from "@react-navigation/native";
 import { MMKVLoader, useMMKVStorage } from "react-native-mmkv-storage";
 const MMKV = new MMKVLoader().initialize()
 import { auth } from "../utility/firebase";
@@ -33,10 +34,11 @@ return  {uri: imageName}
 
 }
 const MainScreen = ({navigation, route}) => {
+    console.log(auth().currentUser)
     let [tarifler, SetTarifler] = useMMKVStorage('yemek',MMKV,[])
-    
+    let isFocused = useIsFocused()
 useEffect(()=>{
-    MMKV.getMap('yemek')
+    SetTarifler(MMKV.getMap('yemek'))
 if (tarifler.length==0) {
     SetTarifler([{
         name:'Toast with Berries' ,
@@ -76,7 +78,7 @@ if (tarifler.length==0) {
 ])  
 }
     
-},[])
+},[isFocused])
         
     
 console.log([...tarifler]+'main')
