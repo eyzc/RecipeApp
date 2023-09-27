@@ -71,7 +71,7 @@ const RecommendedSeeAllScreen = ({navigation, route}) => {
                 <TouchableOpacity>
                 {element.item.like ? (<LikeIcon></LikeIcon>):(<UnLikeIcon></UnLikeIcon>)}
                 </TouchableOpacity>
-                <Image style={{width:65,height:55,resizeMode:'stretch'}} source={imageResources(element.item.pngName)}></Image>
+                <Image style={{width:90,height:100,resizeMode:'stretch'}} source={imageResources(element.item.pngName)}></Image>
                 </View>
                 <View>
                 <Text style={{ color: 'aqua' }}>{element.item.category}</Text>

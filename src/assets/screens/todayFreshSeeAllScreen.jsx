@@ -71,7 +71,7 @@ const TodayFreshSeeAllScreen = ({navigation, route}) => {
                 <View style={styles.todayFreshView}>
                 <View style={styles.todayFreshTopSideRow}>
                 <TouchableOpacity>
-                <LikeIcon></LikeIcon>
+                {element.item.like ? (<LikeIcon></LikeIcon>):(<UnLikeIcon></UnLikeIcon>)}
                 </TouchableOpacity>
                 <Image style={{width:90,height:100,resizeMode:'stretch'}} source={imageResources(element.item.pngName)}></Image>
                 </View>
