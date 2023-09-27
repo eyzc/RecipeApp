@@ -33,18 +33,10 @@ return  {uri: imageName}
 
 const FovouriteScreen = ({navigation, route}) => {
     const [tarifler, SetTarifler] = useMMKVStorage('yemek',MMKV,[])
-    const [likeTarif, SetLikeTarif] = useState([])
+   
     
-    useEffect(()=>{
-for (let i = 0; i < tarifler.length; i++) {
-    if (tarifler[i].like === true) {
-        likeTarif.push(tarifler[i])
-    }
     
-}
-
-    },[tarifler])
-    console.log(likeTarif)
+    
     return (
         <View style={styles.arkaplan}>
            
@@ -52,6 +44,7 @@ for (let i = 0; i < tarifler.length; i++) {
                 <Text style={styles.topTxt}>Favourite</Text>
                 <TouchableOpacity
                 onPress={()=>{
+                    SetTarifler(tarifler)
                     navigation.navigate('Side',{
                         tarifler:tarifler
                     })
@@ -77,7 +70,7 @@ for (let i = 0; i < tarifler.length; i++) {
                 </TouchableOpacity>
             </View>
              <FlatList
-             data={likeTarif}
+             data={tarifler}
              renderItem={element=>{
              for (let index = 0; index < element.item.length; index++) {
                 if (element.item.like) {
@@ -86,6 +79,7 @@ for (let i = 0; i < tarifler.length; i++) {
                 
              }
              return(
+                element.item.like ?
                 <View style={styles.recomendedFlatlistView}>
                 <View style={{ alignItems: 'center', width: '20%', justifyContent: 'center', height: '100%' }}>
                 <Image style={{width:65,height:55,resizeMode:'stretch'}} source={imageResources(element.item.pngName)}></Image> 
@@ -100,8 +94,7 @@ for (let i = 0; i < tarifler.length; i++) {
                 <View style={{ justifyContent: 'space-between', alignItems: 'flex-end' }}>
                 <TouchableOpacity
                 onPress={()=>{
-                    SetLikeTarif([])
-                    SetTarifler([
+                     SetTarifler([
                         ...tarifler.slice(0, element.index),
                     {
                         name:element.item.name ,
@@ -111,12 +104,14 @@ for (let i = 0; i < tarifler.length; i++) {
                         category:element.item.category,
                         pngName:element.item.pngName, 
                     },
-                    
+                    ...tarifler.slice(element.index + 1)
                     ])
+                    console.log(tarifler)
+                }}
                    
                    
                   
-                 }}
+                 
                 >
                     {element.item.like ? (<LikeIcon></LikeIcon>):(<UnLikeIcon></UnLikeIcon>)}
                     </TouchableOpacity>
@@ -125,7 +120,7 @@ for (let i = 0; i < tarifler.length; i++) {
                         <Text style={{ color: '#FF6B00', marginLeft: 10 }}>{element.item.time}</Text>
                     </View>
                 </View>
-            </View>
+            </View>: null
             )
              }}
              >

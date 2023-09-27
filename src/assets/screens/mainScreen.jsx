@@ -16,9 +16,8 @@ import HalfStarIcon from "../icon/halfstar";
 import EmptyStarIcon from "../icon/emptystar";
 import Burger from '../png/chickenburger.png'
 import { MMKVLoader, useMMKVStorage } from "react-native-mmkv-storage";
-import { auth } from "../utility/firebase";
-
 const MMKV = new MMKVLoader().initialize()
+import { auth } from "../utility/firebase";
 
 const  imageResources = (imageName) =>{
     const staticImage = {
@@ -34,11 +33,9 @@ return  {uri: imageName}
 
 }
 const MainScreen = ({navigation, route}) => {
-    const [tarifler, SetTarifler] = useMMKVStorage('yemek',MMKV,[]
-    
-    )
+    const [tarifler, SetTarifler] = useMMKVStorage('yemek',MMKV,[])
 useEffect(()=>{
-
+if (tarifler.length==0) {
     SetTarifler([{
         name:'Toast with Berries' ,
         like:true,
@@ -74,11 +71,13 @@ useEffect(()=>{
         pngName:'chocolate_cake',
         rate:'3.5'
     }
-])
+])  
+}
+    
 },[])
         
     
-console.log(tarifler)
+console.log([...tarifler]+'main')
     return (
         <View style={styles.arkaplan}>
             <View style={styles.topIcon}>
@@ -146,8 +145,11 @@ console.log(tarifler)
                
                  onPress={()=>{
                     navigation.navigate('Recipe',{
-                        tarifler:tarifler
-                    })
+                        tarifler:tarifler,
+                        index:element.index
+                    },
+                    
+                    )
                 }}
                 >
                 <View style={styles.todayFreshView}>

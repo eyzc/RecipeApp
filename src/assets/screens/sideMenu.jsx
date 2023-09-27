@@ -13,7 +13,7 @@ const MMKV = new MMKVLoader().initialize()
 
 const SideMenuScreen = ({navigation,route}) => {
     const [tarifler, SetTarifler] = useMMKVStorage('yemek',MMKV,[])
-
+console.log(tarifler[0].like+'side')
     return (
         <ImageBackground source={SideBack} style={styles.arkaplan}>
             <View style={styles.background}>

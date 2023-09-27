@@ -1,12 +1,31 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TextInput, TouchableOpacity,Image } from 'react-native'
 import BackIcon from "../icon/back";
 import BellIcon from "../icon/bell";
 import UnLikeIcon from "../icon/unlike";
+import LikeIcon from "../icon/like";
 import ClockIcon from "../icon/clock";
 import ServiceIcon from "../icon/service";
 import Toast from "../icon/toast";
+import { MMKVLoader, useMMKVStorage } from "react-native-mmkv-storage";
+const MMKV = new MMKVLoader().initialize()
+
 const RecipeScreen = ({ navigation, route }) => {
+    const [tarifler, SetTarifler] = useMMKVStorage('yemek',MMKV,[])
+    const index = route.params.index
+    console.log(index)
+    const  imageResources = (imageName) =>{
+        const staticImage = {
+            'toast_with_berries':require('../png/toast.png'),
+            'chicken_burger':require('../png/chickenburger.png'),
+            'chocolate_cake':require('../png/chocolatecake.png'),
+            'cup_cake':require('../png/cupcake.png'),
+        }
+    if (staticImage[imageName]){
+        return(staticImage[imageName])
+    }
+    return  {uri: imageName} }
+
     return (
         <View style={styles.arkaplan}>
             <View style={styles.topsideView}>
@@ -19,24 +38,24 @@ const RecipeScreen = ({ navigation, route }) => {
                 </TouchableOpacity>
                 <BellIcon></BellIcon>
             </View>
-            <Text style={{ color: '#128FAE', paddingLeft: 30, paddingTop: 30 }}>Breakfast</Text>
+            <Text style={{ color: '#128FAE', paddingLeft: 30, paddingTop: 30 }}>{tarifler[index].category}</Text>
             <View style={styles.nameTxt}>
-                <Text style={{ color: 'white', fontSize: 25 }}>French Toast with Berries</Text>
-                <UnLikeIcon></UnLikeIcon>
+                <Text style={{ color: 'white', fontSize: 25 }}>{tarifler[index].name}</Text>
+                {tarifler[index].like ? (<LikeIcon></LikeIcon>):(<UnLikeIcon></UnLikeIcon>)}
             </View>
-            <Text style={{ color: 'white', paddingLeft: 30 }}>4.5/5</Text>
+            <Text style={{ color: 'white', paddingLeft: 30 }}>{tarifler[index].rate}/5</Text>
             <View style={{ marginTop:50,flexDirection:'row',justifyContent:'space-between',alignItems:'center' }}>
                 <View>
                 <View style={{ paddingLeft: 30, flexDirection: 'row' }}>
                     <ClockIcon></ClockIcon>
-                    <Text style={{ color: '#7B7B7B', paddingLeft: 10 }}>10 Mins</Text>
+                    <Text style={{ color: '#7B7B7B', paddingLeft: 10 }}>{tarifler[index].time} Mins</Text>
                 </View>
                 <View style={{ padding: 30, flexDirection: 'row' }}>
                     <ServiceIcon></ServiceIcon>
                     <Text style={{ color: '#7B7B7B', paddingLeft: 10 }}>10 Mins</Text>
                 </View>
                 </View>
-              <Toast></Toast>
+                <Image style={{width:200,height:180,resizeMode:'stretch'}} source={imageResources(tarifler[index].pngName)}></Image>
             </View>
             <View style={{flexDirection:'row',marginTop:15}}>
                 <View style={styles.materialsView}></View>
@@ -51,7 +70,7 @@ const RecipeScreen = ({ navigation, route }) => {
                     <Text style={styles.buttonTxt}>Tutorial</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.buttonView}>
-                    <Text style={styles.buttonTxt}>Tutorial</Text>
+                    <Text style={styles.buttonTxt}>Recipe</Text>
                 </TouchableOpacity>
             </View>
         </View>
