@@ -14,6 +14,17 @@
 	<string>6.0</string>
 	<key>CFBundleName</key>
 	<string>$(PRODUCT_NAME)</string>
+
+	<key>NSCameraUsageDescription</key>
+	<string>Kamera iznine ihtiyacimiz var.</string>
+
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Fotoğraflara erişme iznine ihtiyacimiz var.</string>
+
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Fotoğraflari kaydetme yetkisine ihtiyacimiz var.</string>
+
+
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
