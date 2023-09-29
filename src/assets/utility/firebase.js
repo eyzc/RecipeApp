@@ -1,6 +1,8 @@
 
 import {initializeApp} from "@react-native-firebase/app";
 import auth, { firebase } from '@react-native-firebase/auth'
+import storage from "@react-native-firebase/storage"
+import firestore from "@react-native-firebase/firestore"
 
 
 const firebaseConfig = {
@@ -19,4 +21,4 @@ const firebaseConfig = {
   }
  
 
-  export { auth }
+  export { auth, firestore, storage }

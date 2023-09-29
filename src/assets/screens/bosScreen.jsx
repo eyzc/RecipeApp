@@ -1,4 +1,4 @@
-import React,{ useState } from 'react'
+import React, { useState } from 'react'
 import {
     Text,
     View,
@@ -7,59 +7,162 @@ import {
     StyleSheet,
     TouchableOpacity,
     Platform,
+    Alert,
+    FlatList,
 } from 'react-native'
-
-import ImageCropPicker from 'react-native-image-crop-picker'
 
 import {
     PERMISSIONS,
     RESULTS,
-    request,
-} from 'react-native-permissions'
+    request
+} from "react-native-permissions"
 
-const ProfileScreen = () => {
-    const [image, setImage] = useState()
+import ImageCropPicker from 'react-native-image-crop-picker'
 
-    return (
-        <View style={styles.container}>
-            <View style={styles.profileImage}/>
+import { auth, firestore, storage } from '../utility/firebase'
 
-            <View style={styles.inputAndBtnContainer}>
-                <TextInput style={styles.input}/>
 
-                <TouchableOpacity style={styles.btn}
-                    onPress={async () => {
-                        const image = await ImageCropPicker.openPicker({})
-                        setImage(image)
-                    }}
-                >
-                    <Text style={styles.btnTxt} >Upload Photo</Text>
-                </TouchableOpacity>
 
-                <TouchableOpacity style={styles.btn}
-                    onPress={async () => {
+const AddRecipe = () => {
+    const [recipes, setRecipes] = useState([])
+
+    const add = async (imageUrl) => {
+        const image = await imageUrl
+        firestore().collection('kisiler').add({ name:  name , surname:  surname , image: image })
+    }
+    const fetchData = async () => {
+        const data = await firestore().collection('kisiler').get()
+        const recipesData = data.docs.map(element => {
+            return element.data()
+        })
+        setRecipes(recipesData)
+        console.log('recipesData:', recipesData)
+    }
+    const uploadImage = async (image) => {
+
+        console.log(image)
+
+        const uploadUri = Platform.OS === 'ios' ? image.sourceURL : image.path
+        const filename = `${auth().currentUser.uid}_${Date.now()}.jpg`
+        const storageRef = storage().ref(`tarifler/${filename}`)
+        await storageRef.putFile(uploadUri)
+        try {
+            const url = await storageRef.getDownloadURL()
+            console.log('url:', url)
+            return url
+        } catch (error) {
+            console.log(error)
+            return null
+        }
+    }
+    const choosePhoto = () => {
+        Alert.alert(
+            'Bir Seçim Yapın',
+            'Kameradan mı galireden mi?',
+            [
+                {
+                    text: 'Vazgeç',
+                    onPress: () => {
+                        console.log('Vazgeçti')
+                    }
+                },
+                {
+                    text: 'Kamera',
+                    onPress: async () => {
                         let result = false
-                        if (Platform.OS == "android") {
+                        if (Platform.OS == 'android') {
                             result = await request(PERMISSIONS.ANDROID.CAMERA)
                             await request(PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE)
                             await request(PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE)
-                            } else if (Platform.OS == 'ios') {
+
+                        } else if (Platform.OS == 'ios') {
                             result = await request(PERMISSIONS.IOS.CAMERA)
                             await request(PERMISSIONS.IOS.PHOTO_LIBRARY)
                             await request(PERMISSIONS.IOS.PHOTO_LIBRARY_ADD_ONLY)
-                        }
 
-                        if (result = RESULTS.GRANTED) {
-                            const image = await ImageCropPicker.openCamera({})
-                            setImage(image)
                         }
-                    }}
-                >
-                    <Text style={styles.btnTxt} >Shoot Photo</Text>
-                </TouchableOpacity>
-            </View>
+                        if (result == RESULTS.GRANTED) {
+                            const image = await ImageCropPicker.openCamera({
+                                cropping: true
 
-            <Image style={styles.image} source={{uri: image?.path}} />
+                            })
+                            add(uploadImage(image))
+
+                        }
+                        console.log('kamera')
+                    }
+                },
+                {
+                    text: 'Disk',
+                    onPress: async () => {
+
+                        const image = await ImageCropPicker.openPicker({
+                            cropping: true
+
+                        })
+                        return image
+                        console.log('Disk')
+                    }
+                },
+
+            ]
+        )
+    }
+
+    const [name, setName] = useState('')
+    const [surname, setSurname] = useState('')
+
+    return (
+        <View style={styles.container}>
+            <TextInput
+                placeholder='Name'
+                value={name}
+                onChangeText={setName}
+                style={{ borderWidth: 2, borderColor: 'red', width: '70%' }}
+            >
+
+            </TextInput>
+            <TextInput
+                placeholder='Surname'
+                value={surname}
+                onChangeText={setSurname}
+                style={{ borderWidth: 2, borderColor: 'red', width: '70%' }}
+            >
+
+            </TextInput>
+            <TouchableOpacity onPress={add}>
+                <Text>Veri Yolla</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={fetchData}>
+                <Text>Veri çek</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={choosePhoto}>
+                <Text>Foto Seç Veya Çek ve yükle</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={fetchData}>
+                <Text>foto yolla</Text>
+            </TouchableOpacity>
+
+            <FlatList
+                data={recipes}
+                renderItem={element => {
+
+                    return (
+                        <View>
+                            <Text>
+                                {element.item.name}
+                            </Text>
+                            <Text>
+                                {element.item.surname}
+                            </Text>
+                            <Image
+                                style={{width: 400, height: 400}}
+                                source={{uri: element.item.image}}
+                            />
+                        </View>
+                    )
+                }}
+            />
         </View>
     )
 }
@@ -69,52 +172,12 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         alignItems: 'center',
-        backgroundColor: '#1E1E1E',
+        backgroundColor: 'white',
         paddingHorizontal: 24,
-        justifyContent: 'space-between'
-    },
-    
-    profileImage: {
-        width: 128,
-        height: 128,
-        backgroundColor: 'gray',
-        borderRadius: 90,
+        justifyContent: 'center'
     },
 
-    inputAndBtnContainer: {
-        width: '100%',
-        alignItems: 'center',
-    },
-
-    input: {
-        borderWidth: 1,
-        borderColor: 'white',
-        borderRadius: 10,
-        width: '100%',
-        paddingHorizontal: 16,
-        color: 'white',
-    },
-    
-    btn: {
-        backgroundColor: '#F55A00',
-        paddingVertical: 8,
-        borderRadius: 16,
-        width: 144,
-        marginTop: 16,
-    },
-
-    btnTxt: {
-        color: 'white',
-        fontWeight: 'bold',
-        textAlign: 'center',
-    },
-
-    image: {
-        width: 144,
-        height: 144,
-        backgroundColor: 'gray'
-    }
 
 })
 
-export default ProfileScreen
+export default AddRecipe
